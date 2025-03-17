@@ -1,0 +1,9 @@
+.product-card{
+    width: 340px;
+    height: 350px;
+    max-height: 370px;
+    border: 2px solid yellowgreen;
+    margin-bottom: 23px;
+
+}
+
