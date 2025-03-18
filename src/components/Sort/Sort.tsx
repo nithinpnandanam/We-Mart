@@ -3,21 +3,27 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { FC, useState } from "react";
+
 import { fetchAllProducts } from "../../api/allProducts.api";
 
+import { useAllProductContext } from "../../contexts/AllProductsContext/AllProductContext";
 
-const SortFilter: FC = () => {
+import "./Sort.css";
+import { FC, useState } from "react";
 
+const Sort: FC = () => {
   const [sortBy, setSortBy] = useState<string>("asc");
+  const { assignAllProducts } = useAllProductContext();
+
   const handleChange = (event: SelectChangeEvent) => {
     setSortBy(event.target.value);
-    console.log(event.target.value)
-    fetchAllProducts("title" , event.target.value)
+    fetchAllProducts("title", event.target.value).then((response) => {
+      assignAllProducts(response.data.products);
+    });
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box className="sort-filter-container">
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Sort</InputLabel>
         <Select
@@ -26,13 +32,21 @@ const SortFilter: FC = () => {
           value={sortBy}
           label="Sort"
           onChange={handleChange}
+          MenuProps={{
+            sx: {
+              "& .MuiPaper-root": {
+                borderRadius: "10px",
+                left: "4px !important",
+              },
+            },
+          }}
         >
-          <MenuItem value={"asc"}>Sort by title (Asc)</MenuItem>
-          <MenuItem value={"desc"}>Sort by title (Desc)</MenuItem>
+          <MenuItem value={"asc"}>Sort products by title (Asc)</MenuItem>
+          <MenuItem value={"desc"}>Sort products by title (Desc)</MenuItem>
         </Select>
       </FormControl>
     </Box>
   );
 };
 
-export default SortFilter;
+export default Sort;

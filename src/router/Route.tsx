@@ -11,6 +11,7 @@ import Layout from '../components/Layout/Layout';
 import AllProducts from '../components/AllProducts/AllProducts';
 import SignUp from '../pages/SignUp/SignUp';
 import LogIn from '../pages/LogIn/LogIn';
+import UserList from '../components/UserList/UserList';
 
 
 const RouterContainer = () => {
@@ -24,8 +25,8 @@ const RouterContainer = () => {
                 <Route element={<PrivateRoute />}>
                     <Route path={paths.ROOT_PATH} element={<Layout />}>
                         <Route index element={<AllProducts />} />
+                        <Route path={paths.USER_LIST} element={<UserList />} />
                     </Route>
-
                 </Route>
 
                 {/* error */}

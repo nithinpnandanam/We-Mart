@@ -1,9 +1,12 @@
 import { Box, CssBaseline, styled } from "@mui/material";
-import Footer from "../Footer/Footer";
+
 import Header from "../Header/Header";
-import { Outlet } from "react-router-dom";
-import { useDrawer } from "../../contexts/DrawerContext/DrawerContext";
 import Sidebar from "../Sidebar/Sidebar";
+
+import { useDrawerContext } from "../../contexts/DrawerContext/DrawerContext";
+
+import { Outlet } from "react-router-dom";
+import './Layout.css'
 
 const Layout = () => {
   const Main = styled("main", {
@@ -39,9 +42,9 @@ const Layout = () => {
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   }));
-  const { open, drawerWidth } = useDrawer();
+  const { open, drawerWidth } = useDrawerContext();
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box  className='layout-container'>
       <CssBaseline />
       <Header />
       <Sidebar />
@@ -49,7 +52,7 @@ const Layout = () => {
         <DrawerHeader />
         <Outlet />
       </Main>
-      <Footer />
+     
     </Box>
   );
 };

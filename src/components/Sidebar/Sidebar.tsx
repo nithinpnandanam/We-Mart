@@ -1,5 +1,4 @@
 import {
-  Divider,
   Drawer,
   IconButton,
   List,
@@ -10,19 +9,26 @@ import {
   styled,
   useTheme,
 } from "@mui/material";
-import { FC, useEffect, useState } from "react";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { useDrawer } from "../../contexts/DrawerContext/DrawerContext";
-import SortFilter from "../SortFilter/SortFilter";
+
+import Sort from "../Sort/Sort";
+
 import { fetchAllCategories } from "../../api/allCategories.api";
 import { fetchProductByCategory } from "../../api/productByCategory.api";
+
 import { useAllProductContext } from "../../contexts/AllProductsContext/AllProductContext";
+import { useDrawerContext } from "../../contexts/DrawerContext/DrawerContext";
+
+import { FC, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import paths from "../../router/routes";
 
 const Sidebar: FC = () => {
   const {assignAllProducts} = useAllProductContext();
+  const navigate = useNavigate()
   const DrawerHeader = styled("div")(({ theme }) => ({
     display: "flex",
     alignItems: "center",
@@ -32,7 +38,7 @@ const Sidebar: FC = () => {
     justifyContent: "flex-end",
   }));
 
-  const { open, handleDrawerClose,drawerWidth } = useDrawer()
+  const { open, handleDrawerClose,drawerWidth } = useDrawerContext()
   const theme = useTheme();
   type CategoryType = {
     slug:'string';
@@ -43,13 +49,13 @@ const Sidebar: FC = () => {
   useEffect(()=>{
     fetchAllCategories().then((res)=>{
       setAllCategories(res.data)
-      console.log(res.data)
     })
   },[])
+  
   const handleCategorySearch = (category:string) =>{
     fetchProductByCategory(category).then((response)=>{
-      console.log(response.data.products)
       assignAllProducts(response.data.products)
+      navigate(paths.ROOT_PATH)
     })
   }
   return (
@@ -75,8 +81,8 @@ const Sidebar: FC = () => {
           )}
         </IconButton>
       </DrawerHeader>
-      <SortFilter/>
-      <Divider />
+      <Sort/>
+
       <List>
         {AllCategories.map((text, index) => (
           <ListItem key={text.slug} disablePadding>
@@ -85,19 +91,6 @@ const Sidebar: FC = () => {
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
               <ListItemText primary={text.name} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
         ))}

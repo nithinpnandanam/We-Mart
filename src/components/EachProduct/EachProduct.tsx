@@ -5,25 +5,22 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+
 import { FC } from "react";
-import './EachProduct.css'
-type Product = {
-    thumbnail: string;
-  title: string;
-  description: string;
-};
-type EachProductProps = {
-  prp1: Product;
-};
+
+import "./EachProduct.css";
+
+import { EachProductProps } from "./EachProduct.types";
+
 const EachProduct: FC<EachProductProps> = ({
-  prp1: { title, description,thumbnail },
+  product: { title, description, thumbnail },
 }) => {
-  // const {prp1} = props
+  // const {product} = props
   // const {title} = prp1
-//   console.log(thumbnail)
+  //   console.log(thumbnail)
   return (
     <div>
-      <Card  className="product-card">
+      <Card className="product-card">
         <CardActionArea>
           <CardMedia
             component="img"
