@@ -1,5 +1,4 @@
 import {
-  Divider,
   Drawer,
   IconButton,
   List,
@@ -16,7 +15,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useDrawer } from "../../contexts/DrawerContext/DrawerContext";
-import SortFilter from "../SortFilter/SortFilter";
+import Sort from "../Sort/Sort";
 import { fetchAllCategories } from "../../api/allCategories.api";
 import { fetchProductByCategory } from "../../api/productByCategory.api";
 import { useAllProductContext } from "../../contexts/AllProductsContext/AllProductContext";
@@ -81,8 +80,8 @@ const Sidebar: FC = () => {
           )}
         </IconButton>
       </DrawerHeader>
-      <SortFilter/>
-      <Divider />
+      <Sort/>
+
       <List>
         {AllCategories.map((text, index) => (
           <ListItem key={text.slug} disablePadding>
