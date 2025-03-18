@@ -20,9 +20,12 @@ import SortFilter from "../SortFilter/SortFilter";
 import { fetchAllCategories } from "../../api/allCategories.api";
 import { fetchProductByCategory } from "../../api/productByCategory.api";
 import { useAllProductContext } from "../../contexts/AllProductsContext/AllProductContext";
+import { useNavigate } from "react-router-dom";
+import paths from "../../router/routes";
 
 const Sidebar: FC = () => {
   const {assignAllProducts} = useAllProductContext();
+  const navigate = useNavigate()
   const DrawerHeader = styled("div")(({ theme }) => ({
     display: "flex",
     alignItems: "center",
@@ -46,10 +49,13 @@ const Sidebar: FC = () => {
       console.log(res.data)
     })
   },[])
+  
   const handleCategorySearch = (category:string) =>{
     fetchProductByCategory(category).then((response)=>{
       console.log(response.data.products)
       assignAllProducts(response.data.products)
+      console.log("+++++++++++++++++++++")
+      navigate(paths.ROOT_PATH)
     })
   }
   return (
@@ -85,19 +91,6 @@ const Sidebar: FC = () => {
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
               <ListItemText primary={text.name} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
         ))}

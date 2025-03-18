@@ -1,9 +1,9 @@
 import { Box, CssBaseline, styled } from "@mui/material";
-import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { Outlet } from "react-router-dom";
 import { useDrawer } from "../../contexts/DrawerContext/DrawerContext";
 import Sidebar from "../Sidebar/Sidebar";
+import './Layout.css'
 
 const Layout = () => {
   const Main = styled("main", {
@@ -41,7 +41,7 @@ const Layout = () => {
   }));
   const { open, drawerWidth } = useDrawer();
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box  className='layout-container'>
       <CssBaseline />
       <Header />
       <Sidebar />
@@ -49,7 +49,7 @@ const Layout = () => {
         <DrawerHeader />
         <Outlet />
       </Main>
-      <Footer />
+     
     </Box>
   );
 };

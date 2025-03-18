@@ -3,5 +3,6 @@ export const endPoints = {
   PRODUCTS : "/products",
   CATEGORIES:"/products/categories",
   PRODUCT_SEARCH:"/products/search",
-  PRODUCTS_BY_CATEGORY:'/products/category/'
+  PRODUCTS_BY_CATEGORY:'/products/category/',
+  ALL_USERS:'/users'
 };

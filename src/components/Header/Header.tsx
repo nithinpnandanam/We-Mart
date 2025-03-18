@@ -26,6 +26,7 @@ const Header: FC = () => {
                 easing: theme.transitions.easing.easeOut,
                 duration: theme.transitions.duration.enteringScreen,
               }),
+              border:"2px solid red"
             },
           },
         ],
