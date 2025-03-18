@@ -9,16 +9,20 @@ import {
   styled,
   useTheme,
 } from "@mui/material";
-import { FC, useEffect, useState } from "react";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { useDrawer } from "../../contexts/DrawerContext/DrawerContext";
+
 import Sort from "../Sort/Sort";
+
 import { fetchAllCategories } from "../../api/allCategories.api";
 import { fetchProductByCategory } from "../../api/productByCategory.api";
+
 import { useAllProductContext } from "../../contexts/AllProductsContext/AllProductContext";
+import { useDrawerContext } from "../../contexts/DrawerContext/DrawerContext";
+
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import paths from "../../router/routes";
 
@@ -34,7 +38,7 @@ const Sidebar: FC = () => {
     justifyContent: "flex-end",
   }));
 
-  const { open, handleDrawerClose,drawerWidth } = useDrawer()
+  const { open, handleDrawerClose,drawerWidth } = useDrawerContext()
   const theme = useTheme();
   type CategoryType = {
     slug:'string';
@@ -45,7 +49,6 @@ const Sidebar: FC = () => {
   useEffect(()=>{
     fetchAllCategories().then((res)=>{
       setAllCategories(res.data)
-      console.log(res.data)
     })
   },[])
   

@@ -1,20 +1,10 @@
-import { createContext, FC, ReactNode, useContext, useState } from "react";
+import { createContext, FC, useContext, useState } from "react";
+import { AllProductContextType, AllProductsProviderProps, AllProductsType } from "./AllProductContext.types";
 
-type eachProduct = {
-  thumbnail: string;
-  title: string;
-  description: string;
-  id: number;
-};
-type AllProductsType = eachProduct[];
-type AllProductContextType = {
-  AllProducts: AllProductsType;
-  assignAllProducts: (param: AllProductsType) => void;
-};
+
 const AllProductContext = createContext<AllProductContextType | null>(null);
-type AllProductsProviderProps = {
-  children: ReactNode;
-};
+
+
 export const AllProductsProvider: FC<AllProductsProviderProps> = ({
   children,
 }) => {

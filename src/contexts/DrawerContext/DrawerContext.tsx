@@ -1,14 +1,7 @@
-import { createContext, FC, ReactNode, useContext, useState } from "react";
+import { createContext, FC, useContext, useState } from "react";
+import { DrawerContextType, DrawerProviderProps } from "./DrawerContext.types";
 
-type DrawerProviderProps = {
-    children:ReactNode
-}
-type DrawerContextType = {
-    open:boolean;
-    handleDrawerOpen:()=>void;
-    handleDrawerClose:()=>void;
-    drawerWidth:number
-}
+
 const DrawerContext = createContext<DrawerContextType | null>(null)
 export const DrawerProvider:FC <DrawerProviderProps>= ({children}) =>{
 
@@ -36,10 +29,10 @@ export const DrawerProvider:FC <DrawerProviderProps>= ({children}) =>{
 }
 
 // Custom hook for using the context
-export const useDrawer = () => {
+export const useDrawerContext = () => {
     const context = useContext(DrawerContext);
     if (!context) {
-      throw new Error("useDrawer must be used within a DrawerProvider");
+      throw new Error("useDrawerContext must be used within a DrawerProvider");
     }
     return context;
   };
