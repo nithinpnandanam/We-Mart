@@ -38,9 +38,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "25ch",
       "&:focus": {
-        width: "20ch",
+        width: "27ch",
       },
     },
   },
@@ -51,9 +51,7 @@ const ProductSearch = () => {
 
   useEffect(() => {
     const debounceTimeout = setTimeout(() => {
-        console.log("searchQuery",searchQuery)
         productSearch(searchQuery).then((res)=>{
-          console.log("response",res)
           assignAllProducts(res.data.products)
         })
       

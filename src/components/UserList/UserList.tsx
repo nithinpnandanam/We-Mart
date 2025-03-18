@@ -46,7 +46,6 @@ const UserList: FC = () => {
   const [allUsers, setAllUsers] = useState([]);
   useEffect(() => {
     fetchAllUsers().then((response) => {
-      console.log(response.data.users);
       setAllUsers(response.data.users)
     });
   },[]);
@@ -61,7 +60,7 @@ const UserList: FC = () => {
   }));
   
 
-  console.log("filteredPeople",rows)
+
   
   return (
     <Box sx={{ height: 400 }}>

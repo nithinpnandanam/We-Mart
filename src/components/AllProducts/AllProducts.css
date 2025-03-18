@@ -1,7 +1,5 @@
 .all-products-container{
     padding: 14px;
-    border: 2px solid green;
     display: flex;
     flex-wrap: wrap;
-    column-gap: 19px;    
 }

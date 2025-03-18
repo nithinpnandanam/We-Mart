@@ -4,6 +4,7 @@ import { fetchAllProducts } from "../../api/allProducts.api";
 import EachProduct from "../EachProduct/EachProduct";
 import './AllProducts.css'
 import { useAllProductContext } from "../../contexts/AllProductsContext/AllProductContext";
+import { useDrawer } from "../../contexts/DrawerContext/DrawerContext";
 const AllProducts: FC = () => {
     // type eachProduct = {
     //     thumbnail: string;
@@ -15,9 +16,9 @@ const AllProducts: FC = () => {
     // type AllProductsProps = eachProduct[]; // An array of Product objects
     // const [AllProducts,setAllProducts] = useState<AllProductsProps>([])
     const {AllProducts,assignAllProducts} = useAllProductContext()
+    const {open} = useDrawer()
     useEffect(()=>{
         fetchAllProducts().then((response)=>{
-            console.log(response.data.products)
             // setAllProducts(response.data.products)
             assignAllProducts(response.data.products)
 
@@ -27,7 +28,9 @@ const AllProducts: FC = () => {
     },[])
   return ( 
     <>
-      <Box component="section"  className="all-products-container">
+      <Box component="section"  className="all-products-container" sx={{
+        columnGap: open ? "53px" : "31px",
+      }}>
       {
         AllProducts.map((product)=>{
             return (
@@ -49,5 +52,5 @@ export default AllProducts;
 //             localStorage.setItem('accessToken', response.data.accessToken);
 //             localStorage.setItem('refreshToken', response.data.refreshToken);
 //         });
-//     };
+// };
 

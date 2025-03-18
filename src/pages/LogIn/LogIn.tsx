@@ -12,7 +12,6 @@ const LogIn:FC = () =>{
     };
     const handleLogin = () => {
         UserLogin(loginData).then((response) => {
-            console.log(response)
             localStorage.setItem('accessToken', response.data.accessToken);
             localStorage.setItem('refreshToken', response.data.refreshToken);
         });

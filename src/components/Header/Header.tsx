@@ -1,9 +1,10 @@
-import { AppBar, IconButton, styled, Toolbar, Typography, } from "@mui/material";
+import { AppBar, Box, IconButton, styled, Toolbar, Typography, } from "@mui/material";
 import { AppBarProps }from '@mui/material/AppBar';
 import { FC } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useDrawer } from "../../contexts/DrawerContext/DrawerContext";
 import ProductSearch from "../ProductSearch/ProductSearch";
+import './Header.css'
 
 const Header: FC = () => {
     interface AppBarPropsCustom extends AppBarProps {
@@ -26,7 +27,6 @@ const Header: FC = () => {
                 easing: theme.transitions.easing.easeOut,
                 duration: theme.transitions.duration.enteringScreen,
               }),
-              border:"2px solid red"
             },
           },
         ],
@@ -36,7 +36,8 @@ const Header: FC = () => {
   return (
     <div>
       <AppBarStyled position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar className="toolbar-container">
+          <Box className='menu-name-container'>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -52,8 +53,10 @@ const Header: FC = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Persistent drawer
+            We Mart Online Store
           </Typography>
+          </Box>
+          
           <ProductSearch/>
         </Toolbar>
       </AppBarStyled>
