@@ -12,6 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useDrawerContext } from "../../contexts/DrawerContext/DrawerContext";
 
 import ProductSearch from "../ProductSearch/ProductSearch";
+import NavbarMenu from "../AllProducts/NavbarMenu/NavbarMenu";
 
 import { FC } from "react";
 import "./Header.css";
@@ -66,8 +67,11 @@ const Header: FC = () => {
               We Mart Online Store
             </Typography>
           </Box>
-
-          <ProductSearch />
+              <Box className='search-menu-container'>
+              <ProductSearch />
+              <NavbarMenu/>
+              </Box>
+          
         </Toolbar>
       </AppBarStyled>
     </div>
