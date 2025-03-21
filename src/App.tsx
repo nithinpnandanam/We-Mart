@@ -3,6 +3,7 @@ import RouterContainer from "./router/Route";
 import { AuthProvider } from "./contexts/AuthContext/AuthContext";
 import { DrawerProvider } from "./contexts/DrawerContext/DrawerContext";
 import { AllProductsProvider } from "./contexts/AllProductsContext/AllProductContext";
+import { ThemeProviders } from "./contexts/ThemeContext/ThemeContext";
 
 const App: FC = () => {
   return (
@@ -10,7 +11,9 @@ const App: FC = () => {
       <AuthProvider>
         <AllProductsProvider>
           <DrawerProvider>
-            <RouterContainer/>
+            <ThemeProviders>
+              <RouterContainer/>
+            </ThemeProviders>
           </DrawerProvider>
         </AllProductsProvider>
       </AuthProvider>
