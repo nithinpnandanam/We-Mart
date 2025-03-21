@@ -16,6 +16,9 @@ import NavbarMenu from "../AllProducts/NavbarMenu/NavbarMenu";
 
 import { FC } from "react";
 import "./Header.css";
+import { DarkMode, LightMode } from "@mui/icons-material";
+import { useThemeContext } from "../../contexts/ThemeContext/ThemeContext";
+import { ThemeMode } from "../../contexts/ThemeContext/ThemeContext.types";
 
 const Header: FC = () => {
   interface AppBarPropsCustom extends AppBarProps {
@@ -43,10 +46,14 @@ const Header: FC = () => {
     ],
   }));
   const { open, handleDrawerOpen, drawerWidth } = useDrawerContext();
+  const {themeMode,switchThemeMode} = useThemeContext()
+  const toggleDarkMode = () =>{
+    themeMode==='light'?switchThemeMode(ThemeMode.DARK):switchThemeMode(ThemeMode.LIGHT)
+  }
 
   return (
     <div>
-      <AppBarStyled position="fixed" open={open}>
+      <AppBarStyled position="fixed" open={open} color='secondary'>
         <Toolbar className="toolbar-container">
           <Box className="menu-name-container">
             <IconButton
@@ -67,11 +74,21 @@ const Header: FC = () => {
               We Mart Online Store
             </Typography>
           </Box>
-              <Box className='search-menu-container'>
-              <ProductSearch />
-              <NavbarMenu/>
-              </Box>
-          
+          <Box className="toolbar-end-containe">
+            <IconButton
+              title="Switch mode"
+              // color={themeMode ? "primary" : "secondary"}
+              sx={{
+                width: "30px",
+                height: "30px",
+              }}
+              onClick={toggleDarkMode}
+            >
+              {themeMode ? <LightMode /> : <DarkMode />}
+            </IconButton>
+            <ProductSearch />
+            <NavbarMenu />
+          </Box>
         </Toolbar>
       </AppBarStyled>
     </div>
