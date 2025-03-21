@@ -1,0 +1,12 @@
+.menu-container {
+  & .MuiList-root {
+    padding-top: 13px;
+    & .MuiBox-root {
+      padding-bottom: 8px;
+      min-width: 158px;
+    }
+  }
+  & .menu-divider {
+    margin-bottom: 8px;
+  }
+}
