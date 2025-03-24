@@ -11,18 +11,25 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
   {
     field: "firstName",
     headerName: "First name",
-    editable: true,
+    flex: 1,
+    headerAlign: 'left',
+    align: 'left',
   },
   {
     field: "lastName",
     headerName: "Last name",
-    editable: true,
+    flex: 1,
+    headerAlign: 'left',
+    align: 'left',
   },
   {
     field: "age",
     headerName: "Age",
     type: "number",
-    editable: true,
+    flex: 1,
+    headerAlign: 'left',
+    align: 'left',
+
   },
   {
     field: "fullName",
@@ -30,18 +37,26 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
     description: "This column has a value getter and is not sortable.",
     sortable: false,
     valueGetter: (value, row) => `${row.firstName || ""} ${row.lastName || ""}`,
+    flex: 1,
+    headerAlign: 'left',
+    align: 'left',
   },
   {
     field: "email",
     headerName: "Email",
     type: "number",
-    editable: true,
+    flex: 1,
+    headerAlign: 'left',
+    align: 'left',
   },
   {
     field: "phone",
     headerName: "Phone",
     type: "number",
-    editable: true,
+    flex: 1,
+    headerAlign: 'left',
+    align: 'left',
+    minWidth: 180
   },
 ];
 
@@ -79,7 +94,9 @@ const UserList: FC = () => {
         }}
         pageSizeOptions={[10, 25, 50,100]} // Set allowed page sizes
         paginationModel={{ page, pageSize }} // page, pageSize can only be used 
-        
+        className="user-listing-table"
+        disableColumnSelector
+        rowHeight={60}
       />
     </Box>
   );
