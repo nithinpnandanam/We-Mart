@@ -48,7 +48,7 @@ const Sidebar: FC = () => {
   const [AllCategories,setAllCategories] = useState<CategoryType[]>([])
   useEffect(()=>{
     fetchAllCategories().then((res)=>{
-      setAllCategories(res.data)
+      setAllCategories(res.data.slice(0, 15))
     })
   },[])
   

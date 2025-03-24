@@ -7,6 +7,8 @@ import { useAllProductContext } from "../../contexts/AllProductsContext/AllProdu
 
 import { useEffect, useState } from "react";
 
+import './ProductSearch.css'
+
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
@@ -62,7 +64,7 @@ const ProductSearch = () => {
     return () => clearTimeout(debounceTimeout); // Cleanup function
   }, [searchQuery]);
   return (
-    <Search>
+    <Search className="search-container">
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
