@@ -5,6 +5,9 @@ import { fetchAllUsers } from "../../api/allUsers.api";
 
 import { FC, useEffect, useState } from "react";
 import "./UserList.css";
+import Search from "../Search/Search";
+import { useSearchParams } from "react-router-dom";
+import { userSearch } from "../../api/userSearch.api";
 
 const columns: GridColDef<(typeof rows)[number]>[] = [
   { field: "id", headerName: "ID", width: 90 },
@@ -65,17 +68,26 @@ const UserList: FC = () => {
   const [totalUsers, setTotalUsers] = useState<number | undefined >(undefined); // rowCount is expecting a number or undefined .
   const [page, setPage] = useState<number>(0); // Current page (0-based index)
   const [pageSize, setPageSize] = useState<number>(10); // Number of rows per page [Basically its the limit]
+  const [searchValue,setSearchValue] = useState<string>('')
+  const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
-    fetchAllUsers(pageSize,page*pageSize).then((response) => {
+    fetchAllUsers(searchValue,pageSize,page*pageSize).then((response) => {
       setAllUsers(response.data.users);
       setTotalUsers(response.data.total)
     });
   }, [pageSize,page]);
+  useEffect(()=>{
+    userSearch(searchValue).then((response)=>{
+      setAllUsers(response.data.users);
+      setTotalUsers(response.data.total)
+    })
+  },[searchValue])
 
 
   return (
     <Box className="user-list-table-container">
       <Typography variant="h3">User Listing Table</Typography>
+      <Search setSearch={setSearchValue} setParams={setSearchParams} />
       <DataGrid
         rows={allUsers}
         columns={columns}

@@ -1,0 +1,9 @@
+.search-common{
+    width: 400px;
+    & .MuiOutlinedInput-root{
+        padding-left: 1rem;
+        padding-right: 2rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+    }
+}

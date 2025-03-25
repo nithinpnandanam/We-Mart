@@ -4,5 +4,6 @@ export const endPoints = {
   CATEGORIES:"/products/categories",
   PRODUCT_SEARCH:"/products/search",
   PRODUCTS_BY_CATEGORY:'/products/category/',
-  ALL_USERS:'/users'
-};
+  ALL_USERS:'/users',
+  USER_SEARCH:'/users/search'
+} 
