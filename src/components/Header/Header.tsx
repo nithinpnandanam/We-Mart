@@ -19,6 +19,7 @@ import "./Header.css";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { useThemeContext } from "../../contexts/ThemeContext/ThemeContext";
 import { ThemeMode } from "../../contexts/ThemeContext/ThemeContext.types";
+import { useNavigate } from "react-router-dom";
 
 const Header: FC = () => {
   interface AppBarPropsCustom extends AppBarProps {
@@ -46,14 +47,17 @@ const Header: FC = () => {
     ],
   }));
   const { open, handleDrawerOpen, drawerWidth } = useDrawerContext();
-  const {themeMode,switchThemeMode} = useThemeContext()
-  const toggleDarkMode = () =>{
-    themeMode==='light'?switchThemeMode(ThemeMode.DARK):switchThemeMode(ThemeMode.LIGHT)
-  }
+  const { themeMode, switchThemeMode } = useThemeContext();
+  const toggleDarkMode = () => {
+    themeMode === "light"
+      ? switchThemeMode(ThemeMode.DARK)
+      : switchThemeMode(ThemeMode.LIGHT);
+  };
+  const navigate = useNavigate();
 
   return (
     <div>
-      <AppBarStyled position="fixed" open={open} color='secondary'>
+      <AppBarStyled position="fixed" open={open} color="secondary">
         <Toolbar className="toolbar-container">
           <Box className="menu-name-container">
             <IconButton
@@ -70,7 +74,13 @@ const Header: FC = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              onClick={() => navigate("/")}
+              sx={{ cursor: "pointer" }}
+            >
               We Mart Online Store
             </Typography>
           </Box>
