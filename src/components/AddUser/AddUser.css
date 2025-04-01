@@ -1,0 +1,22 @@
+.user-details-container{
+    display: flex;
+    flex-direction: column;
+    width: 650px !important;
+    .MuiTypography-root{
+        text-align: center;
+        padding-bottom: 1.5rem;
+    }
+    .MuiFormControl-root{
+        width: 265px;
+    }
+    .MuiButtonBase-root{
+        padding:11px 16px;
+    }
+}
+
+.user-details{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+

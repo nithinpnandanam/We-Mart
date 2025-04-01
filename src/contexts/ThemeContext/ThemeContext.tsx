@@ -11,7 +11,7 @@ import { Theme, ThemeProvider, useMediaQuery } from "@mui/material";
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProviders: FC<ThemeProviderType> = ({ children }) => {
-  const [themeMode, setThemeMode] = useState<ThemeMode>(ThemeMode.DARK);
+  const [themeMode, setThemeMode] = useState<ThemeMode>(ThemeMode.LIGHT);
 
   const [theme, setTheme] = useState<Theme>(AppLightTheme);
 
