@@ -28,7 +28,7 @@ const style = {
   p: 4,
 };
 
-// Yup.object() : This creates a Yup schema object. 
+// Yup.object() : This creates a Yup schema object.
 // we’re telling Yup : I’m validating an object with multiple fields.
 // .shape({ ... })
 // The shape() method is used to define the structure of that object. You pass it an object with each key being a field name, and each value being a rule/schema.
@@ -102,8 +102,7 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                 <Controller
                   name="firstName"
                   control={control}
-                  render={( {field} ) => {
-                    console.log("field",field)
+                  render={({ field }) => {
                     return (
                       <TextField
                         {...field}
@@ -112,9 +111,8 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                         error={!!errors.firstName}
                         helperText={errors.firstName?.message}
                       />
-                    )
-                  }
-                    }
+                    );
+                  }}
                 />
                 <Controller
                   name="middleName"
@@ -144,6 +142,8 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                 />
               </div>
               <div className="user-details">
+
+
                 <Controller
                   name="age"
                   control={control}
@@ -164,20 +164,40 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                 <Controller
                   name="email"
                   control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label="Email"
-                      variant="outlined"
-                      error={!!errors.email}
-                      helperText={errors.email?.message}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">@gmail.com</InputAdornment>
-                        ),
-                      }}
-                    />
-                  )}
+                  render={({ field }) => {
+                    const handleEmailChange = (
+                      e: React.ChangeEvent<HTMLInputElement>
+                    ) => {
+                      const value = e.target.value.replace(/@gmail\.com$/, "");
+                      field.onChange(`${value}@gmail.com`);
+                    };
+                    // This field object contains everything necessary to connect your input (e.g., TextField) to the form state — and one of the key properties is: field.onChange
+                    // This is a function that:
+                    // updates the form state when the input value changes.
+                    // it's automatically wired into the form's validation and state tracking.
+                    // Usage of value in Textfield Visually shows only the first part of the email
+
+                    return (
+                      <TextField
+                        {...field}
+                        value={field.value?.replace(/@gmail\.com$/, "") || ""}
+                        onChange={handleEmailChange}
+                        label="Email"
+                        variant="outlined"
+                        error={!!errors.email}
+                        helperText={errors.email?.message}
+                        slotProps={{
+                          input: {
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                @gmail.com
+                              </InputAdornment>
+                            ),
+                          },
+                        }}
+                      />
+                    );
+                  }}
                 />
                 <Controller
                   name="username"
@@ -210,5 +230,3 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
 };
 
 export default AddUser;
-
-

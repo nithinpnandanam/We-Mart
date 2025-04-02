@@ -8,7 +8,7 @@ const TelephoneInput = () => {
     setValue(newValue);
   };
 
-  return <MuiTelInput value={value} onChange={handleChange} defaultCountry="IN"/>;
+  return <MuiTelInput value={value} onChange={handleChange} defaultCountry="IN" forceCallingCode/>;
 };
 
 export default TelephoneInput;
