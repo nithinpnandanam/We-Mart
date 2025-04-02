@@ -1,6 +1,9 @@
-- 22.14.0
+- ```nvm use 22.14.0```
 - how to use fonts
 - fix issues with @ imports
+
+<hr>
+
 - Where Should You Use ```<FormControl>``` ?
 - Whenever you use input fields (like`<Select>`, `<TextField>`, `<Checkbox>`, etc.)
 - When you need form validation with MUI components.
@@ -117,14 +120,14 @@ errors = {
 />
 
 ```
-* What is ***endAdornment ? ***
+* What is ```endAdornment ?```
 * endAdornment is used to place an element inside the input field, at the end (right side).
 * You can use it to add icons, text, buttons, etc., that appear inside the input
-**Common use cases:**
+* **Common use cases:**
 * Currency symbols
 * Suffix text (@gmail.com, .com)
 * Password visibility toggle icons
-* What is ***InputAdornment ?***
+* What is ```InputAdornment ?```
 * It’s a Material UI component that wraps any element (text, icon, etc.) you want to place inside the input as an adornment.
 
 <hr>
