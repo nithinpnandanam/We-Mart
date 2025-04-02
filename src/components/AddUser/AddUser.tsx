@@ -1,5 +1,3 @@
-import "./AddUser.css";
-
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -11,10 +9,22 @@ import { FC } from "react";
 import { AddUserProps } from "./AddUser.types";
 import { InputAdornment, inputBaseClasses } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
+
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+
 import TelephoneInput from "../TelephoneInput/TelephoneInput";
+
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+
+import "./AddUser.css";
+
+import { useState } from "react";
+
+import dayjs, { Dayjs } from "dayjs";
 
 const style = {
   position: "absolute",
@@ -57,24 +67,46 @@ interface IFormInput {
 }
 
 const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
+  const [dob, setDob] = useState<Dayjs | null>(null);
+
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<IFormInput>({
     defaultValues: {
       firstName: "",
       middleName: "",
       lastName: "",
-      age: undefined,
+      age: "",
+      dateOfBirth: null,
       email: "",
       username: "",
     },
     resolver: yupResolver(validationSchema),
   });
 
+
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     console.log("onSubmit", data);
+  };
+
+  // calculating the age 
+  const calculateAge = (dob: any| null) => {
+    console.log("dob",dob.month())
+    if (!dob) return 0;
+    const today = dayjs();
+    let age = today.year() - dob.year();
+  
+    // Check if birthday has not occurred yet this year
+    if (
+      today.month() < dob.month() ||
+      (today.month() === dob.month() && today.date() < dob.date())
+    ) {
+      age--;
+    }
+    return age;
   };
 
   return (
@@ -142,7 +174,23 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                 />
               </div>
               <div className="user-details">
-
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DesktopDatePicker
+                    label="Date of Birth"
+                    value={dob}
+                    format="DD/MM/YYYY"
+                    onChange={(newDate) => {
+                      console.log("newDate",newDate)
+                      setDob(newDate);
+                      const age = calculateAge(newDate);
+                      setValue("age", age);
+                    }}
+                    disableFuture
+                    minDate={dayjs('1995-01-31')}
+                    openTo="day" 
+                    views={['year','month','day',]} 
+                  />
+                </LocalizationProvider>
 
                 <Controller
                   name="age"
@@ -155,6 +203,12 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                       type="number"
                       error={!!errors.age}
                       helperText={errors.age?.message}
+                      disabled
+                      // slotProps={{
+                      //   input: {
+                      //     readOnly: true
+                      //   },
+                      // }}
                     />
                   )}
                 />
