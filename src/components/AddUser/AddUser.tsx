@@ -5,7 +5,7 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { AddUserProps } from "./AddUser.types";
 import { InputAdornment } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
@@ -15,18 +15,18 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import TelephoneInput from "../TelephoneInput/TelephoneInput";
-import { isValidPhoneNumber } from 'libphonenumber-js';
 
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-import { InferType } from 'yup';
 
 import "./AddUser.css";
 
 import { useState } from "react";
 
 import dayjs, { Dayjs } from "dayjs";
+
+import { addUser } from "../../api/addUser.api";
+import { FormInputTypes, validationSchema } from "./UserValidations";
 
 const style = {
   position: "absolute",
@@ -40,69 +40,22 @@ const style = {
   p: 4,
 };
 
-// Yup.object() : This creates a Yup schema object.
-// we’re telling Yup : I’m validating an object with multiple fields.
-// .shape({ ... })
-// The shape() method is used to define the structure of that object. You pass it an object with each key being a field name, and each value being a rule/schema.
-// Yup.string() : Expects a string value
-// firstName is the name of the field that needs to be validated [<Controller name="firstName" ... />]
-
-// const validationSchema = Yup.object().shape({
-//   firstName: Yup.string().required("First Name is required"),
-//   lastName: Yup.string().required("Last Name is required"),
-//   middleName:Yup.string().required("Last Name is required"),
-//   age: Yup.number()
-//     .required("Age is required")
-//     .min(20, "Age must be greater than 20")
-//     .max(40, "Age must be less than 30"),
-//   email: Yup.string().email("Invalid email").required("Email is required"),
-//   username: Yup.string().required("Username is required"),
-//   phone:Yup.string().test("is-complete", "Phone number is required", (value:string|undefined) => {
-//     return Boolean(value && value.length > 3);
-
-//   })
-
-// });
-
-const validationSchema = Yup.object({
-  firstName: Yup.string().required("First Name is required"),
-  middleName: Yup.string().typeError("Middle Name must be a string"),
-  lastName: Yup.string().required("Last Name is required"),
-  age: Yup.number()
-    .required("Age is required")
-    .min(20, "Age must be greater than 20")
-    .max(40, "Age must be less than 30"),
-  // phone: Yup.string().test(
-  //   "is-phone-valid",
-  //   "Phone number is required",
-  //   (value) => Boolean(value && value.length > 3)
-  // ),
-  phone: Yup.string()
-    .required("Phone number is required")
-    .test("is-phone-valid", "Phone number is invalid", (value) => {
-      return value ? isValidPhoneNumber(value) : false;
-    }),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  username: Yup.string().required("Username is required"),
-});
-
-
-type FormInputTypes = InferType<typeof validationSchema>;
-
 const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
   const [dob, setDob] = useState<Dayjs | null>(null);
+  
 
   const {
     control,
     handleSubmit,
     setValue,
     formState: { errors },
+    reset
   } = useForm<FormInputTypes>({
     defaultValues: {
       firstName: "",
       middleName: "",
       lastName: "",
-      age: undefined,
+      age: undefined ,
       phone: "",
       email: "",
       username: "",
@@ -112,6 +65,21 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
 
   const onSubmitForm: SubmitHandler<FormInputTypes> = (data) => {
     console.log("onSubmitForm", data);
+    addUser(data).then((data)=>{
+      reset({
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        age: undefined,
+        phone: "",
+        email: "",
+        username: "",
+      });
+      setDob(null)
+      setValue("age", NaN);
+      handleClose()
+    })
+    
   };
 
   // calculating the age
