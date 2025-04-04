@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { FC } from "react";
 import { AddUserProps } from "./AddUser.types";
-import { InputAdornment, inputBaseClasses } from "@mui/material";
+import { InputAdornment } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -19,6 +19,7 @@ import TelephoneInput from "../TelephoneInput/TelephoneInput";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { InferType } from 'yup';
 
 import "./AddUser.css";
 
@@ -45,26 +46,42 @@ const style = {
 // Yup.string() : Expects a string value
 // firstName is the name of the field that needs to be validated [<Controller name="firstName" ... />]
 
-const validationSchema = Yup.object().shape({
+// const validationSchema = Yup.object().shape({
+//   firstName: Yup.string().required("First Name is required"),
+//   lastName: Yup.string().required("Last Name is required"),
+//   middleName:Yup.string().required("Last Name is required"),
+//   age: Yup.number()
+//     .required("Age is required")
+//     .min(20, "Age must be greater than 20")
+//     .max(40, "Age must be less than 30"),
+//   email: Yup.string().email("Invalid email").required("Email is required"),
+//   username: Yup.string().required("Username is required"),
+//   phone:Yup.string().test("is-complete", "Phone number is required", (value:string|undefined) => {
+//     return Boolean(value && value.length > 3);
+
+//   })
+
+// });
+
+const validationSchema = Yup.object({
   firstName: Yup.string().required("First Name is required"),
-  middleName: Yup.string().required("Middle Name is required"),
+  middleName: Yup.string().typeError("Middle Name must be a string"),
   lastName: Yup.string().required("Last Name is required"),
   age: Yup.number()
     .required("Age is required")
-    .min(21, "Age must be greater than 20")
-    .max(29, "Age must be less than 30"),
+    .min(20, "Age must be greater than 20")
+    .max(40, "Age must be less than 30"),
+  phone: Yup.string().test(
+    "is-phone-valid",
+    "Phone number is required",
+    (value) => Boolean(value && value.length > 3)
+  ),
   email: Yup.string().email("Invalid email").required("Email is required"),
   username: Yup.string().required("Username is required"),
 });
 
-interface IFormInput {
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  age: number;
-  email: string;
-  username: string;
-}
+
+type FormInputTypes = InferType<typeof validationSchema>;
 
 const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
   const [dob, setDob] = useState<Dayjs | null>(null);
@@ -74,31 +91,30 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<IFormInput>({
+  } = useForm<FormInputTypes>({
     defaultValues: {
       firstName: "",
       middleName: "",
       lastName: "",
-      age: "",
-      dateOfBirth: null,
+      age: undefined,
+      phone: "",
       email: "",
       username: "",
     },
     resolver: yupResolver(validationSchema),
   });
 
-
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log("onSubmit", data);
+  const onSubmitForm: SubmitHandler<FormInputTypes> = (data) => {
+    console.log("onSubmitForm", data);
   };
 
-  // calculating the age 
-  const calculateAge = (dob: any| null) => {
-    console.log("dob",dob.month())
+  // calculating the age
+  const calculateAge = (dob: any | null) => {
+    console.log("dob", dob.month());
     if (!dob) return 0;
     const today = dayjs();
     let age = today.year() - dob.year();
-  
+
     // Check if birthday has not occurred yet this year
     if (
       today.month() < dob.month() ||
@@ -125,7 +141,7 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
         }}
       >
         <Fade in={open}>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmitForm)}>
             <Box sx={style} className="user-details-container">
               <Typography id="transition-modal-title" variant="h4">
                 Add New User
@@ -180,15 +196,15 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                     value={dob}
                     format="DD/MM/YYYY"
                     onChange={(newDate) => {
-                      console.log("newDate",newDate)
+                      console.log("newDate", newDate);
                       setDob(newDate);
                       const age = calculateAge(newDate);
                       setValue("age", age);
                     }}
                     disableFuture
-                    minDate={dayjs('1995-01-31')}
-                    openTo="day" 
-                    views={['year','month','day',]} 
+                    minDate={dayjs("1995-01-31")}
+                    openTo="day"
+                    views={["year", "month", "day"]}
                   />
                 </LocalizationProvider>
 
@@ -209,10 +225,30 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                       //     readOnly: true
                       //   },
                       // }}
+                      slotProps={{
+                        inputLabel: {
+                          shrink: Boolean(field.value), 
+                        },
+                      }}
                     />
                   )}
                 />
-                <TelephoneInput />
+                 {/* if shrink is true : label moves up  */}
+                <Controller
+                  name="phone"
+                  control={control}
+                  render={({ field, fieldState }) =>{
+                    console.log(field,fieldState)
+                    return (
+                      <TelephoneInput
+                        value={field.value??''}
+                        onChange={field.onChange}
+                        error={!!fieldState.error}
+                        helperText={fieldState.error?.message}
+                      />
+                    )
+                  } }
+                />
               </div>
               <div className="user-details">
                 <Controller

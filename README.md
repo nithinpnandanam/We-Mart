@@ -1,6 +1,5 @@
 - ```nvm use 22.14.0```
-- how to use fonts
-- fix issues with @ imports
+
 
 <hr>
 
