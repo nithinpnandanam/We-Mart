@@ -1,14 +1,25 @@
 import { MuiTelInput } from "mui-tel-input";
-import { useState } from "react";
+import { FC } from "react";
 
-const TelephoneInput = () => {
-    const [value, setValue] = useState<string>('')
 
-  const handleChange = (newValue:string) => {
-    setValue(newValue);
-  };
+type TelephoneInputProps = {
+  value: string ;
+  onChange: (value: string) => void;
+  error?: boolean;
+  helperText?: string;
+}
 
-  return <MuiTelInput value={value} onChange={handleChange} defaultCountry="IN" forceCallingCode/>;
+const TelephoneInput : FC<TelephoneInputProps>= ({ value, onChange, error, helperText }) => {
+  return (
+    <MuiTelInput
+      value={value}
+      onChange={onChange}
+      defaultCountry="IN"
+      forceCallingCode
+      error={error}
+      helperText={helperText}
+    />
+  );
 };
 
 export default TelephoneInput;
