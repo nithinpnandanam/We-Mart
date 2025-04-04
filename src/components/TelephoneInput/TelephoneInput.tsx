@@ -1,15 +1,18 @@
-import { MuiTelInput } from "mui-tel-input";
 import { FC } from "react";
-
-
+import { MuiTelInput } from "mui-tel-input";
 type TelephoneInputProps = {
-  value: string ;
+  value: string;
   onChange: (value: string) => void;
   error?: boolean;
   helperText?: string;
-}
+};
 
-const TelephoneInput : FC<TelephoneInputProps>= ({ value, onChange, error, helperText }) => {
+const TelephoneInput: FC<TelephoneInputProps> = ({
+  value,
+  onChange,
+  error,
+  helperText,
+}) => {
   return (
     <MuiTelInput
       value={value}
