@@ -55,7 +55,6 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
       firstName: "",
       middleName: "",
       lastName: "",
-      age: undefined ,
       phone: "",
       email: "",
       username: "",
@@ -70,14 +69,13 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
         firstName: "",
         middleName: "",
         lastName: "",
-        age: undefined,
         phone: "",
         email: "",
         username: "",
       });
       setDob(null)
       setValue("age", NaN);
-      handleClose()
+      // handleClose()
     })
     
   };
