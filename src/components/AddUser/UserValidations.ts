@@ -20,6 +20,7 @@ export const validationSchema = Yup.object({
       }),
     email: Yup.string().email("Invalid email").required("Email is required"),
     username: Yup.string().required("Username is required"),
+    gender:Yup.string()
   });
 
   export type FormInputTypes = Yup.InferType<typeof validationSchema>;

@@ -159,4 +159,163 @@ errors = {
 * minDate expects a Day.js object,not a string
 * ```openTo``` when the field is clicked first we get an option to select day
 * ``` views={['year','month','day',]} ``` this is the flow in which selection is made avaialable to us
-<hr>
+---
+```
+export const userSearch = (searchQuery: string) => {
+  const params: Record<string, any> = { q: searchQuery };
+
+  if (searchQuery.trim() === "") {
+    params.limit = 10;
+  }
+
+  return axiosClient.get(endPoints.USER_SEARCH, {
+    // "params":params, >> below is the shorhand 
+    params
+  });
+};
+
+```
+* ```Record<string, any>``` : An object where the keys are all of type string
+* The values can be anything (i.e., any)
+
+---
+```
+Info about styled compoennet :
+
+const Main = styled("main", {shouldForwardProp: (prop) => prop !== "open"})
+<
+{
+  open?: boolean;
+  drawerWidth?: number;
+}
+>
+
+(({ theme, open, drawerWidth  }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  transition: theme.transitions.create("margin", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  marginLeft: `-${drawerWidth}px`,
+  variants: [
+    {
+      props: ({ open }) => open,
+      style: {
+        transition: theme.transitions.create("margin", {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+        marginLeft: 0,
+      },
+    },
+  ],
+}));
+```
+---
+```
+Eg of how a styled component is used
+
+const Main = styled("main", {
+  shouldForwardProp: (prop) => prop !== "open",
+})<{
+  open?: boolean;
+  drawerWidth?: number;
+}>(({ theme, open, drawerWidth  }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  transition: theme.transitions.create("margin", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  marginLeft: `-${drawerWidth}px`,
+  variants: [
+    {
+      props: ({ open }) => open,
+      style: {
+        transition: theme.transitions.create("margin", {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+        marginLeft: 0,
+      },
+    },
+  ],
+}));
+```
+```
+# theme is a deafult prop available to us 
+# Its the  MUI theme object
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: "flex-end",
+}));
+
+# ({ theme })  the paranthesis is required in arrow function if we are destructuring on the fly
+# else we can use like 
+
+const DrawerHeader = styled("div")( props => ({
+  display: "flex",
+  alignItems: "center",
+  padding: props.theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...props.theme.mixins.toolbar,
+  justifyContent: "flex-end",
+}));
+
+
+```
+---
+```
+const StyledComponentName = styled("div",{})<props>(() => ());
+# props : all the props that we are passing to the StyledComponentName when we use them
+const prop = {
+  open?: boolean;
+  drawerWidth?: number;
+}
+# The second parameter in styled("div",{}) is an optional config
+
+const StyledComponentName = styled("div",{})<props>(() => ({
+  display: "flex",
+}));
+```
+
+```
+() => ()
+This is an arrow function that takes an object as a parameter and returns another object.
+so we use paranthesis
+else we can write like
+() => {
+  return {
+    flexGrow: 1,
+  }
+}
+
+eg :
+
+const DrawerHeader = styled("div")(({ theme }) => 
+  {
+    return{
+      display: "flex",
+      alignItems: "center",
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: "flex-end",
+    }
+  }
+  );
+
+```
+---
+```
+const StyledComponentName = styled("div",{})<props>(() => ());
+The outer () wraps the arrow function 
+
+```
+---

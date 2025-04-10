@@ -15,6 +15,7 @@ const AllProducts: FC = () => {
   const { AllProducts, assignAllProducts } = useAllProductContext();
   const { open } = useDrawerContext();
   useEffect(() => {
+    console.log("All Products.tsx")
     fetchAllProducts().then((response) => {
       assignAllProducts(response.data.products);
     });
