@@ -14,38 +14,40 @@ import { useDrawerContext } from "../../contexts/DrawerContext/DrawerContext";
 import ProductSearch from "../ProductSearch/ProductSearch";
 import NavbarMenu from "../AllProducts/NavbarMenu/NavbarMenu";
 
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import "./Header.css";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { useThemeContext } from "../../contexts/ThemeContext/ThemeContext";
 import { ThemeMode } from "../../contexts/ThemeContext/ThemeContext.types";
 import { useNavigate } from "react-router-dom";
 
-const Header: FC = () => {
-  interface AppBarPropsCustom extends AppBarProps {
-    open?: boolean;
-  }
-  const AppBarStyled = styled(AppBar, {
-    shouldForwardProp: (prop) => prop !== "open",
-  })<AppBarPropsCustom>(({ theme }) => ({
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    variants: [
-      {
-        props: ({ open }) => open,
-        style: {
-          width: `calc(100% - ${drawerWidth}px)`,
-          marginLeft: `${drawerWidth}px`,
-          transition: theme.transitions.create(["margin", "width"], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-        },
+interface AppBarPropsCustom extends AppBarProps {
+  open?: boolean;
+  drawerWidth: number
+}
+const AppBarStyled = styled(AppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})<AppBarPropsCustom>(({ theme , drawerWidth}) => ({
+  transition: theme.transitions.create(["margin", "width"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  variants: [
+    {
+      props: ({ open }) => open,
+      style: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: `${drawerWidth}px`,
+        transition: theme.transitions.create(["margin", "width"], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
       },
-    ],
-  }));
+    },
+  ],
+}));
+
+const Header: FC = () => {
   const { open, handleDrawerOpen, drawerWidth } = useDrawerContext();
   const { themeMode, switchThemeMode } = useThemeContext();
   const toggleDarkMode = () => {
@@ -54,10 +56,14 @@ const Header: FC = () => {
       : switchThemeMode(ThemeMode.LIGHT);
   };
   const navigate = useNavigate();
+  
+  useEffect(()=>{
+    console.log("Header UseEffect ::: ")
+  },[])
 
   return (
     <div>
-      <AppBarStyled position="fixed" open={open} color="secondary">
+      <AppBarStyled position="fixed" open={open} color="secondary" drawerWidth={drawerWidth} >
         <Toolbar className="toolbar-container">
           <Box className="menu-name-container">
             <IconButton

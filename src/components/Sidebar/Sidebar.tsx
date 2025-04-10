@@ -55,7 +55,7 @@ const Sidebar: FC = () => {
   const handleCategorySearch = (category:string) =>{
     fetchProductByCategory(category).then((response)=>{
       assignAllProducts(response.data.products)
-      navigate(paths.ROOT_PATH)
+      // navigate(paths.ROOT_PATH)
     })
   }
   return (

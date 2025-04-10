@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { FC, useEffect } from "react";
 import { AddUserProps } from "./AddUser.types";
-import { InputAdornment } from "@mui/material";
+import { FormControl, InputAdornment, InputLabel, MenuItem, Select } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -15,6 +15,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import TelephoneInput from "../TelephoneInput/TelephoneInput";
+import { ToastContainer, toast } from "react-toastify";
 
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -27,6 +28,7 @@ import dayjs, { Dayjs } from "dayjs";
 
 import { addUser } from "../../api/addUser.api";
 import { FormInputTypes, validationSchema } from "./UserValidations";
+import { useThemeContext } from "../../contexts/ThemeContext/ThemeContext";
 
 const style = {
   position: "absolute",
@@ -42,14 +44,26 @@ const style = {
 
 const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
   const [dob, setDob] = useState<Dayjs | null>(null);
-  
+  const { themeMode } = useThemeContext();
 
+  const successNotify = () => {
+    toast.success("User Created", {
+      position: "top-right",
+      autoClose: 1300,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: themeMode === "light" ? "light" : "dark",
+    });
+  };
   const {
     control,
     handleSubmit,
     setValue,
     formState: { errors },
-    reset
+    reset,
   } = useForm<FormInputTypes>({
     defaultValues: {
       firstName: "",
@@ -58,13 +72,14 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
       phone: "",
       email: "",
       username: "",
+      gender:""
     },
     resolver: yupResolver(validationSchema),
   });
 
   const onSubmitForm: SubmitHandler<FormInputTypes> = (data) => {
     console.log("onSubmitForm", data);
-    addUser(data).then((data)=>{
+    addUser(data).then((data) => {
       reset({
         firstName: "",
         middleName: "",
@@ -72,12 +87,13 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
         phone: "",
         email: "",
         username: "",
+        gender:""
       });
-      setDob(null)
+      setDob(null);
       setValue("age", NaN);
+      // successNotify()
       // handleClose()
-    })
-    
+    });
   };
 
   // calculating the age
@@ -162,6 +178,39 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                 />
               </div>
               <div className="user-details">
+                <Controller
+                  name="username"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      label="Username"
+                      variant="outlined"
+                      error={!!errors.username}
+                      helperText={errors.username?.message}
+                    />
+                  )}
+                />
+
+                <Controller
+                  name="gender"
+                  control={control}
+                  render={({ field }) => (
+                    <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+        <Select
+          label="Gender"
+        >
+          <MenuItem value={'Male'}>Male</MenuItem>
+          <MenuItem value={'Female'}>Female</MenuItem>
+        </Select>
+      </FormControl>
+    </Box> 
+                  )}
+                />
+              </div>
+              <div className="user-details">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DesktopDatePicker
                     label="Date of Birth"
@@ -199,18 +248,20 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                       // }}
                       slotProps={{
                         inputLabel: {
-                          shrink: Boolean(field.value), 
+                          shrink: Boolean(field.value),
                         },
                       }}
                     />
                   )}
                 />
-                 {/* if shrink is true : label moves up  */}
+                {/* if shrink is true : label moves up  */}
+              </div>
+              <div className="user-details">
                 <Controller
                   name="phone"
                   control={control}
-                  render={({ field, fieldState }) =>{
-                    console.log(field,fieldState)
+                  render={({ field, fieldState }) => {
+                    console.log(field, fieldState);
                     return (
                       <TelephoneInput
                         value={field.value??''}
@@ -218,11 +269,9 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                         error={!!fieldState.error}
                         helperText={fieldState.error?.message}
                       />
-                    )
-                  } }
+                    );
+                  }}
                 />
-              </div>
-              <div className="user-details">
                 <Controller
                   name="email"
                   control={control}
@@ -261,25 +310,14 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                     );
                   }}
                 />
-                <Controller
-                  name="username"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label="Username"
-                      variant="outlined"
-                      error={!!errors.username}
-                      helperText={errors.username?.message}
-                    />
-                  )}
-                />
               </div>
+
               <Button
                 color="secondary"
                 startIcon={<SaveIcon />}
                 variant="contained"
                 type="submit"
+                onClick={successNotify}
               >
                 Save
               </Button>
@@ -287,6 +325,7 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
           </form>
         </Fade>
       </Modal>
+      <ToastContainer />
     </Box>
   );
 };

@@ -8,6 +8,7 @@ import { useAllProductContext } from "../../contexts/AllProductsContext/AllProdu
 import { useEffect, useState } from "react";
 
 import './ProductSearch.css'
+import { fetchAllProducts } from "../../api/allProducts.api";
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -54,15 +55,38 @@ const ProductSearch = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const { assignAllProducts } = useAllProductContext();
 
+  // useEffect(() => {
+  //   const debounceTimeout = setTimeout(() => {
+  //     if (searchQuery.trim() === '') {
+  //       // If search is cleared, fetch all products
+  //       fetchAllProducts().then((res) => {
+  //         assignAllProducts(res.data.products);
+  //       });
+  //     } else {
+  //       // Otherwise, do a search
+  //       productSearch(searchQuery).then((res) => {
+  //         assignAllProducts(res.data.products);
+  //       });
+  //     }
+  //   }, 300);
+  
+  //   return () => clearTimeout(debounceTimeout);
+  // }, [searchQuery]);
+
+  
   useEffect(() => {
+    // if (searchQuery.trim() === '') return;
+    console.log("In UseEffect ProductSearch.tsx");
+  
     const debounceTimeout = setTimeout(() => {
       productSearch(searchQuery).then((res) => {
         assignAllProducts(res.data.products);
       });
-    }, 300); // 300ms delay before calling onSearch
-
-    return () => clearTimeout(debounceTimeout); // Cleanup function
+    }, 300);
+  
+    return () => clearTimeout(debounceTimeout);
   }, [searchQuery]);
+  
   return (
     <Search className="search-container">
       <SearchIconWrapper>

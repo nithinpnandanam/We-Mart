@@ -17,6 +17,8 @@
 .user-details{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    .MuiFormControl-root{
+        margin: 10px;
+    }
 }
 
