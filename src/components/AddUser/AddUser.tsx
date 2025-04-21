@@ -313,7 +313,7 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
               </div>
 
               <Button
-                color="secondary"
+                // color="secondary"
                 startIcon={<SaveIcon />}
                 variant="contained"
                 type="submit"

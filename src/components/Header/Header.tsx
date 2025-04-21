@@ -63,7 +63,7 @@ const Header: FC = () => {
 
   return (
     <div>
-      <AppBarStyled position="fixed" open={open} color="secondary" drawerWidth={drawerWidth} >
+      <AppBarStyled position="fixed" open={open}  drawerWidth={drawerWidth} >
         <Toolbar className="toolbar-container">
           <Box className="menu-name-container">
             <IconButton

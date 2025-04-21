@@ -11,7 +11,7 @@
     .user-listing-table{
       min-height: 600px;
       & .MuiDataGrid-columnHeader{
-        background-color: azure;
+        /* background-color: azure; */
       }
       & .MuiDataGrid-columnHeaderTitle{
         font-weight: 600;

@@ -59,3 +59,5 @@ const Layout = () => {
   );
 };
 export default Layout;
+
+// Whenever open changes [from context ], the Layout component will re-render.
