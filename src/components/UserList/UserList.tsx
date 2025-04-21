@@ -100,7 +100,7 @@ const UserList: FC = () => {
       <Typography variant="h3">User Listing Table</Typography>
       <Box className='search-add-user-container'>
       <Search setSearch={setSearchValue} setParams={setSearchParams} />
-      <Button variant="contained" endIcon={<AddIcon />} onClick={handleOpen}>
+      <Button variant="contained" endIcon={<AddIcon />} onClick={handleOpen} >
         Add
       </Button>
       </Box>
