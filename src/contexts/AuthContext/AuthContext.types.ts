@@ -5,6 +5,7 @@ export type AuthContextType = {
   login: () => void;
   logout: () => void;
   role: Roles|null;
+  setRole: (role: Roles) => void;
 };
 export type AuthProviderProps = {
   children: ReactNode;
@@ -13,5 +14,5 @@ export type AuthProviderProps = {
 export enum Roles {
   ADMIN = "admin",
   USER = "user",
-  MANAGER = "manager", // or whatever your 3rd role is
+  MANAGER = "manager",
 }

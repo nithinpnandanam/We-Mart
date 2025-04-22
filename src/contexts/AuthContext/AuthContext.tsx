@@ -2,11 +2,14 @@ import { createContext, useContext, useState, FC } from "react";
 import { checkAccessToken, removeAccessToken_Role } from "../../utils/authUtils";
 import { AuthContextType, AuthProviderProps, Roles } from "./AuthContext.types";
 
+
 // Create the context with an empty default value
 const authContext = createContext<AuthContextType | undefined>(undefined);
 
 // Create a Provider component
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
+  // const navigate = useNavigate()
+
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
     return checkAccessToken();
   });
@@ -22,19 +25,23 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   // "as Roles | null" is the type of the variable returned from local storage
   const [role, setRole] = useState<Roles | null>(
     () => localStorage.getItem("role") as Roles | null
+    
   );
-
+  console.log("role from context",role)
   // log out
   const logout = () => {
     setIsLoggedIn(false);
     removeAccessToken_Role();
+    // setRole(null)
+    // navigate('/')
   };
 
   const contextValue = {
     isLoggedIn,
     login,
     logout,
-    role
+    role,
+    setRole
   };
 
   return (

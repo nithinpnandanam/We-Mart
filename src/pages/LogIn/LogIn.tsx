@@ -8,9 +8,11 @@ import { FC } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { Roles } from "../../contexts/AuthContext/AuthContext.types";
+import { useAuthContext } from "../../contexts/AuthContext/AuthContext";
 
 const LogIn: FC = () => {
   const navigate = useNavigate()
+  const {setRole} = useAuthContext()
   const loginData: loginDataProps = {
     username: "emilys",
     password: "emilyspass",
@@ -21,6 +23,7 @@ const LogIn: FC = () => {
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
       localStorage.setItem('role',Roles.ADMIN)
+      setRole(Roles.ADMIN); 
       navigate('/')
     });
   };

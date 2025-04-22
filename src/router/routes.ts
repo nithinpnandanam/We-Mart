@@ -3,6 +3,7 @@ const LOGIN_PATH = '/login';
 const SIGNUP_PATH = '/sign-up';
 const ERROR_PATH = '/error';
 const USER_LIST = '/user-list'
+const PROFILE_VIEW = '/my-profile'
 
 
 const paths = {
@@ -10,7 +11,8 @@ const paths = {
     LOGIN_PATH,
     SIGNUP_PATH,
     ERROR_PATH,
-    USER_LIST
+    USER_LIST,
+    PROFILE_VIEW
 } as const;
 
 export default paths;

@@ -13,9 +13,12 @@ import SignUp from "../pages/SignUp/SignUp";
 import LogIn from "../pages/LogIn/LogIn";
 import UserList from "../components/UserList/UserList";
 import RoleProtectedRoute from "../components/RoleProtectedRoute/RoleProtectedRoute";
+import MyProfile from "../components/MyProfile/MyProfile";
+
 
 const RouterContainer = () => {
   return (
+    
     <Router>
       <Routes>
         {/* public route */}
@@ -27,6 +30,9 @@ const RouterContainer = () => {
             <Route index element={<AllProducts />} />
             <Route element={<RoleProtectedRoute allowedRoles={["admin"]} />}>
               <Route path={paths.USER_LIST} element={<UserList />} />
+            </Route>
+            <Route element={<RoleProtectedRoute allowedRoles={["user"]} />}>
+              <Route  path={paths.PROFILE_VIEW}element={<MyProfile />} />
             </Route>
           </Route>
         </Route>
