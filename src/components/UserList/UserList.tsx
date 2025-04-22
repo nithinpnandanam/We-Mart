@@ -10,6 +10,7 @@ import Search from "../Search/Search";
 import { useSearchParams } from "react-router-dom";
 import { userSearch } from "../../api/userSearch.api";
 import AddUser from "../AddUser/AddUser";
+import { useAuthContext } from "../../contexts/AuthContext/AuthContext";
 
 
 const columns: GridColDef<(typeof rows)[number]>[] = [
@@ -72,6 +73,10 @@ const UserList: FC = () => {
   const [pageSize, setPageSize] = useState<number>(10); // Number of rows per page [Basically its the limit]
   const [searchValue, setSearchValue] = useState<string>("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const { role } = useAuthContext();
+  if (role === 'admin') {
+    console.log("ADmin")
+  }
 
   useEffect(() => {
     fetchAllUsers(searchValue, pageSize, page * pageSize).then((response) => {
