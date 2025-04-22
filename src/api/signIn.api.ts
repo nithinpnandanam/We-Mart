@@ -1,14 +1,12 @@
 import { endPoints } from "../constants/endpoints";
-import { post } from "../utils/apiUtils";
+import axiosClient from "../services/axios";
 
 type loginDataProps = {
-    username: string;
-    password: string;
-    expiresInMins: number;
-  };
+  username: string;
+  password: string;
+  expiresInMins: number;
+};
 
-
-
-export const UserLogin = (loginData: loginDataProps) => {
-  return post(loginData, endPoints.LOGIN);
+export const userLogin = (loginData: loginDataProps) => {
+  return axiosClient.post(endPoints.LOGIN, loginData);
 };

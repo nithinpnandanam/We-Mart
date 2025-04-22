@@ -45,6 +45,8 @@ const checkTokenExpiry = (decodedToken: CustomJwtPayload): boolean => {
 };
 
 // remove access token for logout
-export const removeAccessToken = () => {
+export const removeAccessToken_Role = () => {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('role');
 };

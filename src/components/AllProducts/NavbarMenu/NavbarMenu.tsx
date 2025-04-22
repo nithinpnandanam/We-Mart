@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import paths from "../../../router/routes";
 import './NavbarMenu.css'
+import { useAuthContext } from "../../../contexts/AuthContext/AuthContext";
 
 
 const NavbarMenu = () => {
@@ -21,6 +22,7 @@ const NavbarMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate()
+  const {logout} = useAuthContext()
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -29,6 +31,10 @@ const NavbarMenu = () => {
     setAnchorEl(null);
   };
 
+  const handleMyProfile = () => {
+    navigate(paths.PROFILE_VIEW)
+    handleClose()
+  };
   const handleUserList = () =>{
     navigate(paths.USER_LIST)
     handleClose()
@@ -89,7 +95,7 @@ const NavbarMenu = () => {
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
           <Box>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleMyProfile}>
             <Avatar /> My Profile
           </MenuItem>
           <MenuItem onClick={handleUserList}>
@@ -99,7 +105,7 @@ const NavbarMenu = () => {
           
           <Divider className="menu-divider"/>
    
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={logout}>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
