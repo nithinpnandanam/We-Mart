@@ -7,6 +7,6 @@ type loginDataProps = {
   expiresInMins: number;
 };
 
-export const UserLogin = (loginData: loginDataProps) => {
+export const userLogin = (loginData: loginDataProps) => {
   return axiosClient.post(endPoints.LOGIN, loginData);
 };

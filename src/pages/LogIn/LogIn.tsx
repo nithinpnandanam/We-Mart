@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-import { UserLogin } from "../../api/signIn.api";
+import { userLogin } from "../../api/signIn.api";
 
 import { loginDataProps } from "./Login.types";
 
@@ -19,7 +19,7 @@ const LogIn: FC = () => {
     expiresInMins: 30,
   };
   const handleLogin = () => {
-    UserLogin(loginData).then((response) => {
+    userLogin(loginData).then((response) => {
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
       localStorage.setItem('role',Roles.ADMIN)
