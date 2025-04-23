@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getAccessToken } from '../utils/authUtils';
+import { navigateTo } from '../utils/navigationHelper';
 // import { getAccessToken } from '@utils/authUtils';
 
 const axiosClient = axios.create({
@@ -13,7 +14,7 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
     (config) => {
         const accessToken = getAccessToken();
-        if (true) {
+        if (accessToken) {
             config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
         return config;
@@ -27,13 +28,41 @@ axiosClient.interceptors.request.use(
 // response interceptor for errors
 axiosClient.interceptors.response.use(
     (response) => response,
-    (error) => {
-        const status = error.response.status;
-        if (status === 404) {
-            // navigate to error page
+    async (error) => {
+      const originalRequest = error.config;
+  
+      // Access token expired (usually 401)
+      if (error.response?.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
+  
+        const refreshToken = localStorage.getItem("refreshToken");
+        if (refreshToken) {
+          try {
+            const res = await axios.post("Base-URL/auth/refresh", {
+              refreshToken,
+            });
+  
+            const newAccessToken = res.data.accessToken;
+  
+            localStorage.setItem("accessToken", newAccessToken);
+            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+  
+            return axiosClient(originalRequest); // Retry with new token
+          } catch (refreshError) {
+            console.error("Refresh token expired. Logging out.");
+            localStorage.clear(); 
+        
+            // window.location.href = "/login"; 
+            navigateTo("/login");
+            return Promise.reject(refreshError);
+          }
         }
-        return Promise.reject(error);
+      }
+  
+      return Promise.reject(error);
     }
-);
+  );
+  
+  export default axiosClient;
+  
 
-export default axiosClient;

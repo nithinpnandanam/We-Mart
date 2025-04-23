@@ -4,6 +4,7 @@ import { AuthProvider } from "./contexts/AuthContext/AuthContext";
 import { DrawerProvider } from "./contexts/DrawerContext/DrawerContext";
 import { AllProductsProvider } from "./contexts/AllProductsContext/AllProductContext";
 import { ThemeProviders } from "./contexts/ThemeContext/ThemeContext";
+import NavigationRegistrar from "./components/NavigationRegistrar/NavigationRegistrar";
 
 const App: FC = () => {
   return (
@@ -12,7 +13,9 @@ const App: FC = () => {
         <AllProductsProvider>
           <DrawerProvider>
             <ThemeProviders>
-              <RouterContainer/>
+              <RouterContainer>
+                <NavigationRegistrar />
+              </RouterContainer>
             </ThemeProviders>
           </DrawerProvider>
         </AllProductsProvider>

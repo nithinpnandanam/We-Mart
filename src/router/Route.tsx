@@ -14,12 +14,17 @@ import LogIn from "../pages/LogIn/LogIn";
 import UserList from "../components/UserList/UserList";
 import RoleProtectedRoute from "../components/RoleProtectedRoute/RoleProtectedRoute";
 import MyProfile from "../components/MyProfile/MyProfile";
+import { FC, ReactNode } from "react";
 
+type RouterContainerProps = {
+ children:ReactNode
+}
 
-const RouterContainer = () => {
+const RouterContainer:FC<RouterContainerProps> = ({children}) => {
   return (
     
     <Router>
+      {children}
       <Routes>
         {/* public route */}
         <Route path={paths.LOGIN_PATH} element={<LogIn />} />
