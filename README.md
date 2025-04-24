@@ -319,3 +319,10 @@ The outer () wraps the arrow function
 
 ```
 ---
+* In React, useNavigate() from react-router-dom can only be used inside components, not in utility files or API files. 
+* So when you want to navigate programmatically from outside React components (like from an API error handler or utility function), you need a workaround.
+* Refer ```navigationHelper.ts NavigationRegistrar.tsx and App.tsx```
+* **NavigationRegistrar.tsx :** 
+  * It runs once on mount, gets navigate() from React Router via useNavigate(), and stores it globally via setNavigator().
+
+---
