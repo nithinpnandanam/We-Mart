@@ -33,7 +33,7 @@ const RouterContainer:FC<RouterContainerProps> = ({children}) => {
         <Route element={<PrivateRoute />}>
           <Route path={paths.ROOT_PATH} element={<Layout />}>
             <Route index element={<AllProducts />} />
-            <Route element={<RoleProtectedRoute allowedRoles={["admin"]} />}>
+            <Route element={<RoleProtectedRoute allowedRoles={["admin",'manager']} />}>
               <Route path={paths.USER_LIST} element={<UserList />} />
             </Route>
             <Route element={<RoleProtectedRoute allowedRoles={["user"]} />}>
