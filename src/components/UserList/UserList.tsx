@@ -11,6 +11,7 @@ import { useSearchParams } from "react-router-dom";
 import { userSearch } from "../../api/userSearch.api";
 import AddUser from "../AddUser/AddUser";
 import { useAuthContext } from "../../contexts/AuthContext/AuthContext";
+import { Roles } from "../../contexts/AuthContext/AuthContext.types";
 
 
 const columns: GridColDef<(typeof rows)[number]>[] = [
@@ -74,9 +75,7 @@ const UserList: FC = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [searchParams, setSearchParams] = useSearchParams();
   const { role } = useAuthContext();
-  if (role === 'admin') {
-    console.log("ADmin")
-  }
+  console.log('role',role)
 
   useEffect(() => {
     fetchAllUsers(searchValue, pageSize, page * pageSize).then((response) => {
@@ -105,9 +104,9 @@ const UserList: FC = () => {
       <Typography variant="h3">User Listing Table</Typography>
       <Box className='search-add-user-container'>
       <Search setSearch={setSearchValue} setParams={setSearchParams} />
-      <Button variant="contained" endIcon={<AddIcon />} onClick={handleOpen} >
+      { role === Roles.ADMIN && <Button variant="contained" endIcon={<AddIcon />} onClick={handleOpen} >
         Add
-      </Button>
+      </Button>}
       </Box>
       
       <DataGrid
