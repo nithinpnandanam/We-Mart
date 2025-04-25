@@ -16,15 +16,15 @@ import MailIcon from "@mui/icons-material/Mail";
 
 import Sort from "../Sort/Sort";
 
-import { fetchAllCategories } from "../../api/allCategories.api";
-import { fetchProductByCategory } from "../../api/productByCategory.api";
+import { fetchAllCategories } from "@/api/allCategories.api";
+import { fetchProductByCategory } from "@/api/productByCategory.api";
 
-import { useAllProductContext } from "../../contexts/AllProductsContext/AllProductContext";
-import { useDrawerContext } from "../../contexts/DrawerContext/DrawerContext";
+import { useAllProductContext } from "@/contexts/AllProductsContext/AllProductContext";
+import { useDrawerContext } from "@/contexts/DrawerContext/DrawerContext";
 
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import paths from "../../router/routes";
+
 
 const Sidebar: FC = () => {
   const {assignAllProducts} = useAllProductContext();

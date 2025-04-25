@@ -2,16 +2,16 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Box, Button, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 
-import { fetchAllUsers } from "../../api/allUsers.api";
+import { fetchAllUsers } from "@/api/allUsers.api";
 
 import { FC, useEffect, useState } from "react";
 import "./UserList.css";
 import Search from "../Search/Search";
 import { useSearchParams } from "react-router-dom";
-import { userSearch } from "../../api/userSearch.api";
+import { userSearch } from "@/api/userSearch.api";
 import AddUser from "../AddUser/AddUser";
-import { useAuthContext } from "../../contexts/AuthContext/AuthContext";
-import { Roles } from "../../contexts/AuthContext/AuthContext.types";
+import { useAuthContext } from "@/contexts/AuthContext/AuthContext";
+import { Roles } from "@/contexts/AuthContext/AuthContext.types";
 
 
 const columns: GridColDef<(typeof rows)[number]>[] = [

@@ -3,7 +3,7 @@ import { Box, CssBaseline, styled } from "@mui/material";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 
-import { useDrawerContext } from "../../contexts/DrawerContext/DrawerContext";
+import { useDrawerContext } from "@/contexts/DrawerContext/DrawerContext";
 
 import { Outlet } from "react-router-dom";
 import './Layout.css'

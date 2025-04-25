@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, FC } from "react";
-import { checkAccessToken, removeAccessToken_Role } from "../../utils/authUtils";
+import { checkAccessToken, removeAccessToken_Role } from "@/utils/authUtils";
 import { AuthContextType, AuthProviderProps, Roles } from "./AuthContext.types";
 
 

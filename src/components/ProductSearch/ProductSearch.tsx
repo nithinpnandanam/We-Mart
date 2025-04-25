@@ -1,14 +1,14 @@
 import { alpha, InputBase, styled } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-import { productSearch } from "../../api/productSearch.api";
+import { productSearch } from "@/api/productSearch.api";
 
-import { useAllProductContext } from "../../contexts/AllProductsContext/AllProductContext";
+import { useAllProductContext } from "@/contexts/AllProductsContext/AllProductContext";
 
 import { useEffect, useState } from "react";
 
 import './ProductSearch.css'
-import { fetchAllProducts } from "../../api/allProducts.api";
+
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),

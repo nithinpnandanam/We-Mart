@@ -9,7 +9,7 @@ import {
 import { AppBarProps } from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { useDrawerContext } from "../../contexts/DrawerContext/DrawerContext";
+import { useDrawerContext } from "@/contexts/DrawerContext/DrawerContext";
 
 import ProductSearch from "../ProductSearch/ProductSearch";
 import NavbarMenu from "../AllProducts/NavbarMenu/NavbarMenu";
@@ -17,8 +17,8 @@ import NavbarMenu from "../AllProducts/NavbarMenu/NavbarMenu";
 import { FC, useEffect } from "react";
 import "./Header.css";
 import { DarkMode, LightMode } from "@mui/icons-material";
-import { useThemeContext } from "../../contexts/ThemeContext/ThemeContext";
-import { ThemeMode } from "../../contexts/ThemeContext/ThemeContext.types";
+import { useThemeContext } from "@/contexts/ThemeContext/ThemeContext";
+import { ThemeMode } from "@/contexts/ThemeContext/ThemeContext.types";
 import { useNavigate } from "react-router-dom";
 
 interface AppBarPropsCustom extends AppBarProps {

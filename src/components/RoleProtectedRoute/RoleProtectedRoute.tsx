@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useAuthContext } from '../../contexts/AuthContext/AuthContext'
+import { useAuthContext } from '@/contexts/AuthContext/AuthContext'
 import { Navigate, Outlet } from 'react-router-dom';
 
 type RoleProtectedRouteProps = {

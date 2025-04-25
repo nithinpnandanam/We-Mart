@@ -1,4 +1,4 @@
-import Error from "../pages/Error/Error";
+import Error from "@/pages/Error/Error";
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,13 +7,13 @@ import {
 } from "react-router-dom";
 import paths from "./routes";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
-import Layout from "../components/Layout/Layout";
-import AllProducts from "../components/AllProducts/AllProducts";
-import SignUp from "../pages/SignUp/SignUp";
-import LogIn from "../pages/LogIn/LogIn";
-import UserList from "../components/UserList/UserList";
-import RoleProtectedRoute from "../components/RoleProtectedRoute/RoleProtectedRoute";
-import MyProfile from "../components/MyProfile/MyProfile";
+import Layout from "@/components/Layout/Layout";
+import AllProducts from "@/components/AllProducts/AllProducts";
+import SignUp from "@/pages/SignUp/SignUp";
+import LogIn from "@/pages/LogIn/LogIn";
+import UserList from "@/components/UserList/UserList";
+import RoleProtectedRoute from "@/components/RoleProtectedRoute/RoleProtectedRoute";
+import MyProfile from "@/components/MyProfile/MyProfile";
 import { FC, ReactNode } from "react";
 
 type RouterContainerProps = {

@@ -4,9 +4,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-import { fetchAllProducts } from "../../api/allProducts.api";
+import { fetchAllProducts } from "@/api/allProducts.api";
 
-import { useAllProductContext } from "../../contexts/AllProductsContext/AllProductContext";
+import { useAllProductContext } from "@/contexts/AllProductsContext/AllProductContext";
 
 import "./Sort.css";
 import { FC, useState } from "react";

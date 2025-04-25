@@ -26,9 +26,9 @@ import { useState } from "react";
 
 import dayjs, { Dayjs } from "dayjs";
 
-import { addUser } from "../../api/addUser.api";
+import { addUser } from "@/api/addUser.api";
 import { FormInputTypes, validationSchema } from "./UserValidations";
-import { useThemeContext } from "../../contexts/ThemeContext/ThemeContext";
+import { useThemeContext } from "@/contexts/ThemeContext/ThemeContext";
 
 const style = {
   position: "absolute",

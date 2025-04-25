@@ -1,14 +1,14 @@
 import { Button } from "@mui/material";
 
-import { userLogin } from "../../api/signIn.api";
+import { userLogin } from "@/api/signIn.api";
 
 import { loginDataProps } from "./Login.types";
 
 import { FC } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { Roles } from "../../contexts/AuthContext/AuthContext.types";
-import { useAuthContext } from "../../contexts/AuthContext/AuthContext";
+import { Roles } from "@/contexts/AuthContext/AuthContext.types";
+import { useAuthContext } from "@/contexts/AuthContext/AuthContext"
 
 const LogIn: FC = () => {
   const navigate = useNavigate()
