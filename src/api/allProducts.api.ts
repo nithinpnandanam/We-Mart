@@ -1,5 +1,5 @@
-import { endPoints } from "../constants/endpoints";
-import axiosClient from "../services/axios";
+import { endPoints } from "@/constants/endpoints";
+import axiosClient from "@/services/axios";
 
 export const fetchAllProducts = (sortBy?:string,order?:string) => {
   return axiosClient.get(endPoints.PRODUCTS,{

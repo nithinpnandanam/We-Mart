@@ -1,5 +1,5 @@
-import { endPoints } from "../constants/endpoints";
-import axiosClient from "../services/axios";
+import { endPoints } from "@/constants/endpoints";
+import axiosClient from "@/services/axios";
 
 type loginDataProps = {
   username: string;

@@ -1,5 +1,5 @@
-import { endPoints } from "../constants/endpoints";
-import axiosClient from "../services/axios";
+import { endPoints } from "@/constants/endpoints";
+import axiosClient from "@/services/axios";
 
 export const fetchAllUsers = (searchValue:string,limitValue?:number,skipValue?:number) => {
   return axiosClient.get(endPoints.ALL_USERS,{
