@@ -1,4 +1,4 @@
-import axiosClient from '../services/axios';
+import axiosClient from '@/services/axios';
 
 export const post = (data: Record<string, unknown>, endpoint: string) => {
     return axiosClient.post(endpoint, data);

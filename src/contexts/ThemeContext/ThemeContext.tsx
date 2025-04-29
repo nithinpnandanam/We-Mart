@@ -5,7 +5,7 @@ import {
   ThemeProviderType,
   ThemeMode,
 } from "./ThemeContext.types";
-import { AppDarkTheme, AppLightTheme } from "../../styles/theme";
+import { AppDarkTheme, AppLightTheme } from "@/styles/theme";
 import { Theme, ThemeProvider, useMediaQuery } from "@mui/material";
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);

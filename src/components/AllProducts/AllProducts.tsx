@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 
-import { fetchAllProducts } from "../../api/allProducts.api";
+import { fetchAllProducts } from "@/api/allProducts.api";
 
 import EachProduct from "../EachProduct/EachProduct";
 
-import { useAllProductContext } from "../../contexts/AllProductsContext/AllProductContext";
-import { useDrawerContext } from "../../contexts/DrawerContext/DrawerContext";
+import { useAllProductContext } from "@/contexts/AllProductsContext/AllProductContext";
+import { useDrawerContext } from "@/contexts/DrawerContext/DrawerContext";
 
 import { FC, useEffect } from "react";
 

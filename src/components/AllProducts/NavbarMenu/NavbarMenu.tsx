@@ -12,10 +12,10 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import paths from "../../../router/routes";
+import paths from "@/router/routes";
 import './NavbarMenu.css'
-import { useAuthContext } from "../../../contexts/AuthContext/AuthContext";
-import { navigateTo } from "../../../utils/navigationHelper";
+import { useAuthContext } from "@/contexts/AuthContext/AuthContext";
+
 
 
 const NavbarMenu = () => {

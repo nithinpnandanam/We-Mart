@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { setNavigator } from "../../utils/navigationHelper";
+import { setNavigator } from "@/utils/navigationHelper";
 
 const NavigationRegistrar = () => {
   const navigate = useNavigate();

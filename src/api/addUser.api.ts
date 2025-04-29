@@ -1,6 +1,6 @@
-import { FormInputTypes } from "../components/AddUser/UserValidations";
-import { endPoints } from "../constants/endpoints";
-import axiosClient from "../services/axios";
+import { FormInputTypes } from "@/components/AddUser/UserValidations";
+import { endPoints } from "@/constants/endpoints";
+import axiosClient from "@/services/axios";
 
 
 type userDataTypes = FormInputTypes

@@ -10,12 +10,18 @@ export default defineConfig({
 },
 resolve: {
     alias: {
-        '@': '/src',
-        '@components': '/src/components',
-        '@pages': '/src/pages',
-        '@utils': '/src/utils',
-        '@hooks': '/src/hooks',
-        '@contexts': '/src/contexts',
+        '@':"/src",
+        'api': "/src/api",
+        'components': "/src/components",
+        'constants': "/src/constants",
+        'contexts':"/src/contexts",
+        'pages': "/src/pages",
+        'router': "/src/router",    
+        'services': "/src/services", 
+        'styles': "/src/styles", 
+        'types': "/src/types", 
+        'utils': "/src/utils", 
+
     },
 },
 // define: {
@@ -24,26 +30,4 @@ resolve: {
 })
 
 
-// import { defineConfig } from 'vite';
-// import react from '@vitejs/plugin-react';
 
-// export default defineConfig({
-//     plugins: [react()],
-    // server: {
-    //     host: 'localhost',
-    //     port: 3000,
-    // },
-    // resolve: {
-    //     alias: {
-    //         '@': '/src',
-    //         '@components': '/src/components',
-    //         '@pages': '/src/pages',
-    //         '@utils': '/src/utils',
-    //         '@hooks': '/src/hooks',
-    //         '@contexts': '/src/contexts',
-    //     },
-    // },
-    // define: {
-    //     'process.env': process.env,
-    // },
-// });
