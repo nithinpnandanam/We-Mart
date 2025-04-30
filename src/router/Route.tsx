@@ -15,6 +15,7 @@ import UserList from "@/components/UserList/UserList";
 import RoleProtectedRoute from "@/components/RoleProtectedRoute/RoleProtectedRoute";
 import MyProfile from "@/components/MyProfile/MyProfile";
 import { FC, ReactNode } from "react";
+import AboutUs from "@/components/AboutUs/AboutUs";
 
 type RouterContainerProps = {
  children:ReactNode
@@ -39,6 +40,7 @@ const RouterContainer:FC<RouterContainerProps> = ({children}) => {
             <Route element={<RoleProtectedRoute allowedRoles={["user"]} />}>
               <Route  path={paths.PROFILE_VIEW}element={<MyProfile />} />
             </Route>
+            <Route path={paths.ABOUT_US} element={<AboutUs />} />
           </Route>
         </Route>
 

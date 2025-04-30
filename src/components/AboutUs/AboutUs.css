@@ -1,0 +1,7 @@
+.heading-container{
+    display: flex;
+    justify-content: space-between;
+}
+.select-container{
+    width: 250px;
+}

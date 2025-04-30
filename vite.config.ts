@@ -15,6 +15,7 @@ resolve: {
         'components': "/src/components",
         'constants': "/src/constants",
         'contexts':"/src/contexts",
+        'locales':"/src/locales",
         'pages': "/src/pages",
         'router': "/src/router",    
         'services': "/src/services", 
