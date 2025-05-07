@@ -326,3 +326,13 @@ The outer () wraps the arrow function
 * **NavigationRegistrar.tsx :** 
   * It runs once on mount, gets navigate() from React Router via useNavigate(), and stores it globally via setNavigator().
 ---
+* ```useNavigate()``` and ```<Navigate />``` are two different ways to navigate in React Router, and they serve slightly different use cases.
+  * ```useNavigate()```
+    * This is a React hook.
+    * It gives you a navigate() function you can call programmatically.
+    * Use when you want to navigate after an action or event (like a button click, form submit, API success).
+  * ```<Navigate /> ```
+    * This is a React component.
+    * You place it inside JSX, and when it renders, it immediately redirects to the specified route.
+    * Use when you want to conditionally redirect based on some state inside the render flow — like inside a return or a route guard.
+---

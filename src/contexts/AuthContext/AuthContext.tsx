@@ -2,7 +2,7 @@ import { createContext, useContext, useState, FC } from "react";
 import { checkAccessToken, removeAccessToken_Role } from "@/utils/authUtils";
 import { AuthContextType, AuthProviderProps, Roles } from "./AuthContext.types";
 
-
+// tsx file because we need to provide it in App.tsx
 // Create the context with an empty default value
 const authContext = createContext<AuthContextType | undefined>(undefined);
 
