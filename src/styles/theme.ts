@@ -8,10 +8,10 @@ export const AppLightTheme = createTheme({
         main: colors.primary,
         light: colors.primaryLight,
     },
-   background:{
-    default:colors.themeWhite,
-    paper:colors.primaryLight
-   }
+  //  background:{
+  //   default:colors.themeWhite,
+  //   paper:colors.primaryLight
+  //  }
   },
 });
 
@@ -22,9 +22,9 @@ export const AppDarkTheme = createTheme({
         main: colors.primary,
         light: colors.primaryLight,
     },
-     background:{
-      default:colors.themeDarkGrey,
-      paper:colors.darkcard
-     }
+    //  background:{
+    //   default:colors.themeDarkGrey,
+    //   paper:colors.darkcard
+    //  }
     },
   });
