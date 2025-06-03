@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Typography, Button, FormControl, InputLabel, Select, MenuItem, circularProgressClasses, Box } from "@mui/material";
+import { Typography, FormControl, InputLabel, Select, MenuItem, Box, SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
 import './AboutUs.css'
 
@@ -7,7 +7,7 @@ const AboutUs = () => {
   const { t, i18n } = useTranslation();
 
   const [language,setLanguage] = useState('')
-  const changeLanguage = (event:any) => {
+  const changeLanguage = (event:SelectChangeEvent) => {
     const lng = event.target.value
     setLanguage(lng)
     i18n.changeLanguage(lng);
