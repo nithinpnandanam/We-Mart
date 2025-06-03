@@ -81,7 +81,7 @@ const Sidebar: FC = () => {
           )}
         </IconButton>
       </DrawerHeader>
-      <Sort/>
+      {/* <Sort/> */}
 
       <List>
         {AllCategories.map((text, index) => (

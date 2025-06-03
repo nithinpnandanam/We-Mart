@@ -36,7 +36,6 @@ const Sort: FC = () => {
             sx: {
               "& .MuiPaper-root": {
                 borderRadius: "10px",
-                left: "4px !important",
               },
             },
           }}

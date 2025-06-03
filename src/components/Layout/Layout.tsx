@@ -37,7 +37,7 @@ const Main = styled("main", {
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  padding: theme.spacing(0, 1),
+  padding: theme.spacing(0, 1), // padding: "0px 8px"; top and bottom 0px and left and right 8px
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
