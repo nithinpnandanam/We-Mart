@@ -7,7 +7,13 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { FC, useEffect } from "react";
 import { AddUserProps } from "./AddUser.types";
-import { FormControl, InputAdornment, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  FormControl,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -72,7 +78,7 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
       phone: "",
       email: "",
       username: "",
-      gender:""
+      gender: "",
     },
     resolver: yupResolver(validationSchema),
   });
@@ -87,7 +93,7 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
         phone: "",
         email: "",
         username: "",
-        gender:""
+        gender: "",
       });
       setDob(null);
       setValue("age", NaN);
@@ -197,16 +203,16 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                   control={control}
                   render={({ field }) => (
                     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-        <Select
-          label="Gender"
-        >
-          <MenuItem value={'Male'}>Male</MenuItem>
-          <MenuItem value={'Female'}>Female</MenuItem>
-        </Select>
-      </FormControl>
-    </Box> 
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">
+                          Gender
+                        </InputLabel>
+                        <Select label="Gender">
+                          <MenuItem value={"Male"}>Male</MenuItem>
+                          <MenuItem value={"Female"}>Female</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Box>
                   )}
                 />
               </div>
@@ -264,7 +270,7 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                     console.log(field, fieldState);
                     return (
                       <TelephoneInput
-                        value={field.value??''}
+                        value={field.value ?? ""}
                         onChange={field.onChange}
                         error={!!fieldState.error}
                         helperText={fieldState.error?.message}

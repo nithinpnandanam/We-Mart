@@ -6,5 +6,6 @@ export const endPoints = {
   PRODUCTS_BY_CATEGORY:'/products/category/',
   ALL_USERS:'/users',
   USER_SEARCH:'/users/search',
-  ADD_USER:'/users/add'
+  ADD_USER:'/users/add',
+  FILE_UPLOAD:'/upload'
 } 

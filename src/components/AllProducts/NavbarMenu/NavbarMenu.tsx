@@ -40,6 +40,11 @@ const NavbarMenu = () => {
     navigate(paths.USER_LIST)
     handleClose()
   }
+
+  const handleFileUpload = () =>{
+    navigate(paths.FILE_UPLOAD)
+    handleClose()
+  }
   return (
     <>
       {/* <React.Fragment> */}
@@ -101,6 +106,9 @@ const NavbarMenu = () => {
           </MenuItem>
           <MenuItem onClick={handleUserList}>
             <Avatar /> User List
+          </MenuItem>
+          <MenuItem onClick={handleFileUpload}>
+            <Avatar /> File Upload
           </MenuItem>
           </Box>
           

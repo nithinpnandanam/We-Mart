@@ -11,7 +11,7 @@ import img1 from "../../assets/Images/2.jpg";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setRole } = useAuthContext();
+  const { setRole,login } = useAuthContext();
   // const {setLoggedInUser} = useUserContext()
   const navigate = useNavigate();
 
@@ -25,9 +25,10 @@ const Login = () => {
       userLogin(loginData).then((response) => {
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
-        localStorage.setItem("role", Roles.ADMIN);
-        setRole(Roles.ADMIN);
+        localStorage.setItem("role", Roles.MANAGER);
+        setRole(Roles.MANAGER);
         navigate(paths.ROOT_PATH);
+        login()
       });
     } catch (err) {
       console.error("Login failed:", err);
