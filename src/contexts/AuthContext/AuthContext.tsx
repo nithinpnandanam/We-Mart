@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, FC } from "react";
 import { checkAccessToken, removeAccessToken_Role } from "@/utils/authUtils";
 import { AuthContextType, AuthProviderProps, Roles } from "./AuthContext.types";
-import { navigateTo } from "@/utils/navigationHelper";
+import { navigateTo } from "@/utils/navigationUtils";
 import paths from "@/router/routes";
 
 // tsx file because we need to provide it in App.tsx
