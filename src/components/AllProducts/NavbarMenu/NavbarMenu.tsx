@@ -42,6 +42,9 @@ const NavbarMenu = () => {
   }
   const handleAboutUs = () =>{
     navigate(paths.ABOUT_US)
+  }
+  const handleFileUpload = () =>{
+    navigate(paths.FILE_UPLOAD)
     handleClose()
   }
   return (
@@ -108,6 +111,9 @@ const NavbarMenu = () => {
           </MenuItem>
           <MenuItem onClick={handleAboutUs}>
             <Avatar /> About Us
+            </MenuItem>
+          <MenuItem onClick={handleFileUpload}>
+            <Avatar /> File Upload
           </MenuItem>
           </Box>
           

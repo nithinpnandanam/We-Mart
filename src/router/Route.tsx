@@ -16,6 +16,7 @@ import RoleProtectedRoute from "@/components/RoleProtectedRoute/RoleProtectedRou
 import MyProfile from "@/components/MyProfile/MyProfile";
 import { FC, ReactNode } from "react";
 import AboutUs from "@/components/AboutUs/AboutUs";
+import FileUpload from "@/components/FileUpload/FileUpload";
 
 type RouterContainerProps = {
  children:ReactNode
@@ -41,12 +42,14 @@ const RouterContainer:FC<RouterContainerProps> = ({children}) => {
               <Route  path={paths.PROFILE_VIEW}element={<MyProfile />} />
             </Route>
             <Route path={paths.ABOUT_US} element={<AboutUs />} />
+            <Route path={paths.FILE_UPLOAD} element={<FileUpload/>}>
+            </Route>
           </Route>
         </Route>
 
         {/* error */}
         <Route path={paths.ERROR_PATH} element={<Error />} />
-        <Route path="*" element={<Navigate to="/error" />} />
+        {/* <Route path="*" element={<Navigate to="/error" />} /> */}
       </Routes>
     </Router>
   );

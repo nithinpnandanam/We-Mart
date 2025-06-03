@@ -23,18 +23,18 @@ import { useNavigate } from "react-router-dom";
 
 interface AppBarPropsCustom extends AppBarProps {
   open?: boolean;
-  drawerWidth: number
+  drawerWidth: number;
 }
 const AppBarStyled = styled(AppBar, {
   shouldForwardProp: (prop) => prop !== "open",
-})<AppBarPropsCustom>(({ theme , drawerWidth}) => ({
+})<AppBarPropsCustom>(({ theme, drawerWidth }) => ({
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   variants: [
     {
-      props: ({ open }) => open,
+      props: ({ open }) => open, // Apply this style variant only if open is true.
       style: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: `${drawerWidth}px`,
@@ -56,14 +56,14 @@ const Header: FC = () => {
       : switchThemeMode(ThemeMode.LIGHT);
   };
   const navigate = useNavigate();
-  
-  useEffect(()=>{
-    console.log("Header UseEffect ::: ")
-  },[])
+
+  useEffect(() => {
+    console.log("Header UseEffect ::: ");
+  }, []);
 
   return (
     <div>
-      <AppBarStyled position="fixed" open={open}  drawerWidth={drawerWidth} >
+      <AppBarStyled position="fixed" open={open} drawerWidth={drawerWidth}>
         <Toolbar className="toolbar-container">
           <Box className="menu-name-container">
             <IconButton

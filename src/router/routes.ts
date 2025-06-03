@@ -5,6 +5,7 @@ const ERROR_PATH = '/error';
 const USER_LIST = '/user-list'
 const PROFILE_VIEW = '/my-profile'
 const ABOUT_US = '/about-us'
+const FILE_UPLOAD = '/file-upload'
 
 
 const paths = {
@@ -14,7 +15,8 @@ const paths = {
     ERROR_PATH,
     USER_LIST,
     PROFILE_VIEW,
-    ABOUT_US
+    ABOUT_US,
+    FILE_UPLOAD
 } as const;
 
 export default paths;

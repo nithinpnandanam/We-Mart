@@ -11,7 +11,17 @@ import { Theme, ThemeProvider, useMediaQuery } from "@mui/material";
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProviders: FC<ThemeProviderType> = ({ children }) => {
-  const [themeMode, setThemeMode] = useState<ThemeMode>(ThemeMode.LIGHT);
+
+  const getInitialThemeMode = (): ThemeMode => {
+    const saved = localStorage.getItem("theme-mode") as ThemeMode | null;
+    if (!saved) {
+      localStorage.setItem("theme-mode", ThemeMode.LIGHT);
+      return ThemeMode.LIGHT;
+    }
+    return saved 
+  };
+
+  const [themeMode, setThemeMode] = useState<ThemeMode>(getInitialThemeMode);
 
   const [theme, setTheme] = useState<Theme>(AppLightTheme);
 
@@ -44,6 +54,7 @@ export const ThemeProviders: FC<ThemeProviderType> = ({ children }) => {
   }, [themeMode, SYSTEM_THEME]);
 
   const switchThemeMode = (mode: ThemeMode) => {
+    localStorage.setItem("theme-mode", mode); // ✅ store theme
     setThemeMode(mode);
   };
 

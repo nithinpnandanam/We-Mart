@@ -1,6 +1,3 @@
-- ```nvm use 22.14.0```
-
-
 <hr>
 
 - Where Should You Use ```<FormControl>``` ?
@@ -242,6 +239,8 @@ const Main = styled("main", {
     },
   ],
 }));
+* shouldForwardProp prevents the custom open prop from being passed to the actual DOM (which would cause a React warning).
+* “Use the open prop internally for styling, but don’t pass it to the HTML.”
 ```
 ```
 # theme is a deafult prop available to us 
@@ -335,4 +334,21 @@ The outer () wraps the arrow function
     * This is a React component.
     * You place it inside JSX, and when it renders, it immediately redirects to the specified route.
     * Use when you want to conditionally redirect based on some state inside the render flow — like inside a return or a route guard.
+```
+<input type="file" onChange={handleFileChange} />
+const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setFile(e.target.files[0]);
+    }
+  };
+* This input opens the file picker dialog (file explorer) when clicked.
+* Once a user selects a file, it stores the selected file(s) in e.target.files.
+* Why we use onChange
+  * This event triggers after a file has been selected.
+  * The onChange event is how you detect what file was chosen.
+* Why not onClick?
+  * onClick fires when the input is clicked, not when a file is selected.
+  * It gives you no information about the file.
+  * The file is only available after selection, not on click.
+```
 ---

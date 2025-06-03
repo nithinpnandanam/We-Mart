@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, FC } from "react";
 import { checkAccessToken, removeAccessToken_Role } from "@/utils/authUtils";
 import { AuthContextType, AuthProviderProps, Roles } from "./AuthContext.types";
+import { navigateTo } from "@/utils/navigationHelper";
+import paths from "@/router/routes";
 
 // tsx file because we need to provide it in App.tsx
 // Create the context with an empty default value
@@ -32,8 +34,9 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const logout = () => {
     setIsLoggedIn(false);
     removeAccessToken_Role();
-    // setRole(null)
-    // navigate('/')
+    setRole(null)
+    navigateTo(paths.LOGIN_PATH)
+
   };
 
   const contextValue = {
