@@ -5,6 +5,8 @@ import { DrawerProvider } from "@/contexts/DrawerContext/DrawerContext";
 import { AllProductsProvider } from "@/contexts/AllProductsContext/AllProductContext";
 import { ThemeProviders } from "@/contexts/ThemeContext/ThemeContext";
 import NavigationRegistrar from "@/components/NavigationRegistrar/NavigationRegistrar";
+import '@/utils/i18nUtils.ts'; // import the i18n setup
+
 
 const App: FC = () => {
   return (

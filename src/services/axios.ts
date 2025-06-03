@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { getAccessToken } from '@/utils/authUtils';
-import { navigateTo } from '@/utils/navigationHelper';
+import { navigateTo } from '@/utils/navigationUtils';
+import paths from '@/router/routes';
 // import { getAccessToken } from '@utils/authUtils';
 
 const axiosClient = axios.create({
@@ -56,7 +57,7 @@ axiosClient.interceptors.response.use(
           } catch (refreshError) {
             console.error("Refresh token expired. Logging out.");
             localStorage.clear(); 
-            navigateTo("/login");
+            navigateTo(paths.LOGIN_PATH);
             return Promise.reject(refreshError);
           }
         }

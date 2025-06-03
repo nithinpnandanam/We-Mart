@@ -325,6 +325,15 @@ The outer () wraps the arrow function
 * **NavigationRegistrar.tsx :** 
   * It runs once on mount, gets navigate() from React Router via useNavigate(), and stores it globally via setNavigator().
 ---
+* ```useNavigate()``` and ```<Navigate />``` are two different ways to navigate in React Router, and they serve slightly different use cases.
+  * ```useNavigate()```
+    * This is a React hook.
+    * It gives you a navigate() function you can call programmatically.
+    * Use when you want to navigate after an action or event (like a button click, form submit, API success).
+  * ```<Navigate /> ```
+    * This is a React component.
+    * You place it inside JSX, and when it renders, it immediately redirects to the specified route.
+    * Use when you want to conditionally redirect based on some state inside the render flow — like inside a return or a route guard.
 ```
 <input type="file" onChange={handleFileChange} />
 const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -332,6 +341,7 @@ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setFile(e.target.files[0]);
     }
   };
+```
 * This input opens the file picker dialog (file explorer) when clicked.
 * Once a user selects a file, it stores the selected file(s) in e.target.files.
 * Why we use onChange
@@ -341,5 +351,44 @@ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   * onClick fires when the input is clicked, not when a file is selected.
   * It gives you no information about the file.
   * The file is only available after selection, not on click.
+---
 ```
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+      setUploading(true);
+      await axios.post('http://localhost:7777/upload', formData, {
+        onUploadProgress: (progressEvent) => {
+          console.log(progressEvent)
+          const percentCompleted = Math.round((progressEvent.loaded * 100) / (progressEvent.total || 1));
+          setProgress(percentCompleted);
+        },
+      });
+    }
+```
+* FormData is a built-in browser object that lets you construct a form submission payload, especially useful when you're:
+  * Uploading files
+  * Sending data as multipart/form-data (used for file uploads)
+* When uploading files via axios.post() or fetch(), you can’t just send raw JSON because:
+  * JSON can’t represent file binary data
+  * The server expects a multipart/form-data request
+* FormData automatically sets: Content-Type to multipart/form-data
+```
+await axios.post('/upload', formData, {
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
+});
+* Axios can usually detect and set this header automatically — so even if you don’t specify it, it usually works fine.
+```
+---
+* internationalization
+* i18n: Core library for translations
+* initReactI18next: Allows React to use i18n
+* LanguageDetector: Automatically detects browser language
+* The language detector checks the following (in order, by default):
+  * localStorage – if you previously stored a selected language
+  * navigator.language – the browser's preferred language
+  * HTML <html lang="..."> attribute
+  * Cookies (if configured)
 ---

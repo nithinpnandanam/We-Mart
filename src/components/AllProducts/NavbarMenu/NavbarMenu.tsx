@@ -1,4 +1,4 @@
-import { Logout, PersonAdd, Settings } from "@mui/icons-material";
+import { Co2Sharp, Logout, PersonAdd, Settings } from "@mui/icons-material";
 import {
   Avatar,
   Box,
@@ -40,7 +40,9 @@ const NavbarMenu = () => {
     navigate(paths.USER_LIST)
     handleClose()
   }
-
+  const handleAboutUs = () =>{
+    navigate(paths.ABOUT_US)
+  }
   const handleFileUpload = () =>{
     navigate(paths.FILE_UPLOAD)
     handleClose()
@@ -107,6 +109,9 @@ const NavbarMenu = () => {
           <MenuItem onClick={handleUserList}>
             <Avatar /> User List
           </MenuItem>
+          <MenuItem onClick={handleAboutUs}>
+            <Avatar /> About Us
+            </MenuItem>
           <MenuItem onClick={handleFileUpload}>
             <Avatar /> File Upload
           </MenuItem>
