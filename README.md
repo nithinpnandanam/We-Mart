@@ -149,13 +149,50 @@ errors = {
 ```
 
 * ```LocalizationProvider``` : Think of it like a "provider" that tells MUI how to format, parse, and localize dates.
-* ithout this, the date pickers won't work correctly because MUI wouldn't know how to handle your date format, locale, and adapter.
+* without this, the date pickers won't work correctly because MUI wouldn't know how to handle your date format, locale, and adapter.
 * ```dateAdapter``` is a prop of LocalizationProvider. It tells MUI which date library to use.
-* ```AdapterDayjs``` is the adapter that connects Day.js to MUI pickers.
+* ```AdapterDayjs``` is the adapter that connects **Day.js** to MUI pickers.
 * ```setValue("age", age);``` It updates the value of the form field called "age" in your form state.
 * minDate expects a Day.js object,not a string
 * ```openTo``` when the field is clicked first we get an option to select day
 * ``` views={['year','month','day',]} ``` this is the flow in which selection is made avaialable to us
+---
+```
+fieldState
+{
+  error?: {
+    type: string;
+    message?: string;
+  };
+  isTouched: boolean;
+  isDirty: boolean;
+  invalid: boolean;
+}
+```
+---
+```
+<div className="user-details">
+  <Controller
+    name="username"
+    control={control}
+    render={({ field }) => (
+      <TextField
+        {...field}
+        label="Username"
+        variant="outlined"
+        error={!!errors.username}
+        helperText={errors.username?.message}
+      />
+    )}
+  />
+
+These properties will be there when we destructure 
+onChange={field.onChange}
+value={field.value}
+name={field.name}
+onBlur={field.onBlur}
+ref={field.ref}
+```
 ---
 ```
 export const userSearch = (searchQuery: string) => {

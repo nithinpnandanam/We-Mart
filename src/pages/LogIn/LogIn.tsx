@@ -25,8 +25,8 @@ const Login = () => {
       userLogin(loginData).then((response) => {
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
-        localStorage.setItem("role", Roles.MANAGER);
-        setRole(Roles.MANAGER);
+        localStorage.setItem("role", Roles.ADMIN);
+        setRole(Roles.ADMIN);
         navigate(paths.ROOT_PATH);
         login()
       });

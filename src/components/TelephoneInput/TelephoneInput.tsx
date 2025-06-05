@@ -18,7 +18,7 @@ const TelephoneInput: FC<TelephoneInputProps> = ({
       value={value}
       onChange={onChange}
       defaultCountry="IN"
-      forceCallingCode
+      forceCallingCode // prevents  us from editing the country code
       error={error}
       helperText={helperText}
     />

@@ -20,8 +20,8 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
     field: "firstName",
     headerName: "First name",
     flex: 1,
-    headerAlign: "left",
-    align: "left",
+    headerAlign: "left", // for heading to allign 
+    align: "left", // for all data corresponding to the heading to allign to the left
   },
   {
     field: "lastName",
@@ -73,12 +73,16 @@ const UserList: FC = () => {
   const [page, setPage] = useState<number>(0); // Current page (0-based index)
   const [pageSize, setPageSize] = useState<number>(10); // Number of rows per page [Basically its the limit]
   const [searchValue, setSearchValue] = useState<string>("");
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams(); // used in url
   const { role } = useAuthContext();
   console.log('role',role)
 
   useEffect(() => {
+    // pageSize is the limit
     fetchAllUsers(searchValue, pageSize, page * pageSize).then((response) => {
+      // when we are searching for a user having a particular name only say 2 users wil be present
+      // 1–2 of 2 .so setTotalUsers should also be updated
+      // page * pageSize [pageSize is 10,when we navigate using the arrow mark page becomes 2 so 20 data wil get skipped]
       setAllUsers(response.data.users);
       setTotalUsers(response.data.total);
     });
@@ -117,16 +121,21 @@ const UserList: FC = () => {
         checkboxSelection
         disableRowSelectionOnClick
         onPaginationModelChange={(model) => {
-          // console.log("Pagination triggered")
+          // onPaginationModelChange runs whenever we work with the footer section in the table
+          console.log("Pagination triggered",model)
           // onPaginationModelChange will run in cases when pagination is triggered
           if (model.pageSize !== pageSize) {
+            // when limit changes page must be resetted to 0 so that every data from the beginning is seen
             setPage(0); // Reset page to 0 if pageSize changes
+            setPageSize(model.pageSize);
+          }else{
+            setPage(model.page);
+            // PageSize is not changing so we dont need to update
           }
-          setPage(model.page);
-          setPageSize(model.pageSize);
+          
         }}
         pageSizeOptions={[10, 25, 50, 100]} // Set allowed page sizes
-        paginationModel={{ page, pageSize }} // page, pageSize can only be used
+        paginationModel={{ page, pageSize }} // page, pageSize can only be used This is used in footer section of the table
         className="user-listing-table"
         disableColumnSelector
         rowHeight={60}
