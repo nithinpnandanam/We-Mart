@@ -97,8 +97,8 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
       });
       setDob(null);
       setValue("age", NaN);
-      // successNotify()
-      // handleClose()
+      successNotify()
+      handleClose()
     });
   };
 
@@ -183,6 +183,7 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                   )}
                 />
               </div>
+              
               <div className="user-details">
                 <Controller
                   name="username"
@@ -271,7 +272,7 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                     return (
                       <TelephoneInput
                         value={field.value ?? ""}
-                        onChange={field.onChange}
+                        onChange={(value) => field.onChange(value)} // “Send this val (phone number) to React Hook Form so it can update the phone field in the form state.”
                         error={!!fieldState.error}
                         helperText={fieldState.error?.message}
                       />
@@ -286,7 +287,8 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
                       e: React.ChangeEvent<HTMLInputElement>
                     ) => {
                       const value = e.target.value.replace(/@gmail\.com$/, "");
-                      field.onChange(`${value}@gmail.com`);
+                      field.onChange(`${value}@gmail.com`); // thisis how fields value must be updated 
+                      // field.value = `${value}@gmail.com`; //field.value is readonly 
                     };
                     // This field object contains everything necessary to connect your input (e.g., TextField) to the form state — and one of the key properties is: field.onChange
                     // This is a function that:
@@ -296,8 +298,8 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
 
                     return (
                       <TextField
-                        {...field}
-                        value={field.value?.replace(/@gmail\.com$/, "") || ""}
+                        {...field} // value and onChange needs to be customised so we explicitle have written those
+                        value={field.value?.replace(/@gmail\.com$/, "") || ""} // visually @gmail must be removed
                         onChange={handleEmailChange}
                         label="Email"
                         variant="outlined"
@@ -319,11 +321,9 @@ const AddUser: FC<AddUserProps> = ({ handleClose, open }) => {
               </div>
 
               <Button
-                // color="secondary"
                 startIcon={<SaveIcon />}
                 variant="contained"
-                type="submit"
-                onClick={successNotify}
+                type="submit" // this is needed
               >
                 Save
               </Button>

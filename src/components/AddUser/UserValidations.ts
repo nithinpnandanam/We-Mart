@@ -16,7 +16,11 @@ export const validationSchema = Yup.object({
     phone: Yup.string()
       .required("Phone number is required")
       .test("is-phone-valid", "Phone number is invalid", (value) => {
-        return value ? isValidPhoneNumber(value) : false;
+        if (isValidPhoneNumber(value)) {
+          return true;
+        } else {
+          return false;
+        }
       }),
     email: Yup.string().email("Invalid email").required("Email is required"),
     username: Yup.string().required("Username is required"),
