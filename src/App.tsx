@@ -15,7 +15,7 @@ const App: FC = () => {
         <AllProductsProvider>
           <DrawerProvider>
             <ThemeProviders>
-              <RouterContainer>
+              <RouterContainer>   
                 <NavigationRegistrar />
               </RouterContainer>
             </ThemeProviders>

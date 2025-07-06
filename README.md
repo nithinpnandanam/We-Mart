@@ -4,6 +4,7 @@
 - Whenever you use input fields (like`<Select>`, `<TextField>`, `<Checkbox>`, etc.)
 - When you need form validation with MUI components.
 - To group related inputs with labels
+<hr>
 
 ```
   <Select
@@ -22,9 +23,6 @@
   }}
 >
 ```
-
-<hr>
-
 - & refers to the parent.So we use it for correct scoping
 - When applying styles inside a component, & ensures they only affect the specific instance, not globally.
 
@@ -45,7 +43,6 @@
   )}
 />
 ```
-
 - Controller component from react-hook-form, which is used to connect controlled UI components (like MUI's TextField) with the form management system of react-hook-form
   `control={control}`
 - It's responsible for registering inputs, managing their state, and handling validation in react-hook-form.
@@ -356,9 +353,9 @@ The outer () wraps the arrow function
 ```
 ---
 * In React, useNavigate() from react-router-dom can only be used inside components, not in utility files or API files 
-* in response interceptors of axios we can gind the usage of navigateTo . 
+* in response interceptors of axios we can find the usage of navigateTo . 
 * So when you want to navigate programmatically from outside React components (like from an API error handler or utility function), you need a workaround.
-* Refer ```navigationHelper.ts NavigationRegistrar.tsx and App.tsx```
+* Refer ```navigationUtils.ts NavigationRegistrar.tsx and App.tsx```
 * **NavigationRegistrar.tsx :** 
   * It runs once on mount, gets navigate() from React Router via useNavigate(), and stores it globally via setNavigator().
 ---
@@ -371,6 +368,9 @@ The outer () wraps the arrow function
     * This is a React component.
     * You place it inside JSX, and when it renders, it immediately redirects to the specified route.
     * Use when you want to conditionally redirect based on some state inside the render flow — like inside a return or a route guard.
+<hr>
+
+Refer ```FileUploaad.tsx```
 ```
 <input type="file" onChange={handleFileChange} />
 const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -419,6 +419,7 @@ await axios.post('/upload', formData, {
 * Axios can usually detect and set this header automatically — so even if you don’t specify it, it usually works fine.
 ```
 ---
+Refer ```i18nUtils.tsx``` ```locales folder``` and ```AboutUs.tsx```
 * internationalization
 * i18n: Core library for translations
 * initReactI18next: Allows React to use i18n

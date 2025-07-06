@@ -7,7 +7,7 @@ const AboutUs = () => {
   const { t, i18n } = useTranslation();
 
   const [language,setLanguage] = useState('')
-  const changeLanguage = (event:SelectChangeEvent) => {
+  const changeMyLanguage = (event:SelectChangeEvent) => {
     const lng = event.target.value
     setLanguage(lng)
     i18n.changeLanguage(lng);
@@ -24,7 +24,7 @@ const AboutUs = () => {
           id="demo-simple-select"
           value={language}
           label="Language"
-          onChange={changeLanguage}
+          onChange={changeMyLanguage}
         >
           <MenuItem value={"en"}>English</MenuItem>
           <MenuItem value={"ml"}>Malayalam</MenuItem>

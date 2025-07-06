@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getAccessToken } from '@/utils/authUtils';
-import { navigateTo } from '@/utils/navigationHelper';
+import { navigateTo } from '@/utils/navigationUtils';
 // import { getAccessToken } from '@utils/authUtils';
 
 const axiosClientNew = axios.create({
